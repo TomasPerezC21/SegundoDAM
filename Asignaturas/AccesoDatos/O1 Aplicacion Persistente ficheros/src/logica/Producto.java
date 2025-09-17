@@ -71,6 +71,7 @@ public abstract class Producto implements Vendible{
 
     @Override
     public boolean estaDisponible(int cantidad) {
+        //forma mas rapida
         return (cantidad>stock);
     }
 }
