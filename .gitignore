@@ -1,0 +1,37 @@
+# Compilados de Java
+*.class
+
+# Archivos de log
+*.log
+
+# BlueJ
+*.ctxt
+
+# Directorios de IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# Directorios de Eclipse (por si acaso)
+*.classpath
+*.project
+*.settings/
+
+# Directorios de NetBeans (por si acaso)
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# Archivos generados por Maven
+target/
+
+# Archivos generados por Gradle
+.gradle/
+build/
+
+# Cachés
+*.DS_Store
+Thumbs.db
