@@ -1,6 +1,6 @@
 package logica;
 
-public class PorductoNoInventarioException extends RuntimeException {
+public class ProductoNoInventarioException extends RuntimeException {
 
     /*
     public PorductoNoInventarioException() {
@@ -8,8 +8,7 @@ public class PorductoNoInventarioException extends RuntimeException {
         System.out.println("El producto no tiene artículos disponibles.");
     }*/
 
-    public PorductoNoInventarioException(String message) {
-
+    public ProductoNoInventarioException(String message) {
         super(message);
     }
 

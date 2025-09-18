@@ -28,13 +28,47 @@ public class Inventario {
     }
 
     public String mostrarInventario(){
-        String resultado = "";
+        StringBuilder resultado = new StringBuilder();
 
         for (Producto producto : listaProductos) {
-            resultado = resultado + producto.getNombre() + "\n";
+            resultado.append(producto.getNombre()).append("\n");
         }
 
-        return resultado;
+        return resultado.toString();
+    }
+
+    public void VenderProducto(int id, int cantidad) throws ProductoNoInventarioException {
+
+        for (Producto producto : listaProductos) {
+            if (producto.getId() == id) {
+                if(cantidad <= producto.getStock()) {
+                    producto.setStock(producto.getStock() - cantidad);
+                    System.out.println("Vendido. Unidades restantes de " + producto.getNombre() + ": " + producto.getStock() + ".");
+                }
+                else {
+                    throw new ProductoNoInventarioException("No hay " + cantidad + " unidades de " + producto.getNombre() + ".");
+                }
+            }
+            else {
+                throw new ProductoNoInventarioException("Producto no encontrado en el inventario.");
+            }
+        }
+    }
+
+    public void ReponerProducto(int id, int cantidad) throws ProductoNoInventarioException {
+
+        for (Producto producto : listaProductos) {
+            int cantidadAntigua =  producto.getStock();
+
+            if (producto.getId() == id) {
+                producto.setStock(producto.getStock() + cantidad);
+                System.out.println("Inventario actualizado con éxito. De " + cantidadAntigua + " a " + producto.getStock() + ".");
+            }
+            else {
+                throw new ProductoNoInventarioException("Producto no encontrado en el inventario.");
+            }
+        }
+
     }
 
 
