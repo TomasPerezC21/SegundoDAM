@@ -5,6 +5,7 @@ import logica.Inventario;
 import logica.Ropa;
 import logica.ProductoNoInventarioException;
 
+import java.sql.SQLOutput;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -29,7 +30,7 @@ public class AppTienda {
                 System.out.print("Elige una opción (1-5): ");
                 if (sc.hasNextInt()) {
                     opcion = sc.nextInt();
-                    sc.nextLine(); // consumir salto
+                    sc.nextLine();
                     if (opcion >= 1 && opcion <= 5) break;
                 } else {
                     sc.nextLine();
@@ -39,17 +40,15 @@ public class AppTienda {
 
             switch (opcion) {
                 case 1 -> {
-                    System.out.println("Tipo de producto: ");
-                    System.out.println("1. Electrónico.");
-                    System.out.println("2. Ropa.");
-
                     int tipo;
                     while (true) {
+                        System.out.println("Tipo de producto: ");
+                        System.out.println("1. Electrónico.");
+                        System.out.println("2. Ropa.");
                         System.out.print("Selecciona (1-2): ");
-                        if (sc.hasNextInt()) {
-                            tipo = sc.nextInt();
-                            sc.nextLine();
-                            if (tipo == 1 || tipo == 2) break;
+                        tipo = sc.nextInt();
+                        if (tipo == 1 || tipo == 2) {
+                            break;
                         } else {
                             sc.nextLine();
                         }
@@ -121,11 +120,11 @@ public class AppTienda {
 
                     int cantidad;
                     while (true) {
-                        System.out.print("Cantidad del producto (>= 0): ");
+                        System.out.print("Cantidad del producto (> 0): ");
                         if (sc.hasNextInt()) {
                             cantidad = sc.nextInt();
                             sc.nextLine();
-                            if (cantidad >= 0) break;
+                            if (cantidad > 0) break;
                         } else {
                             sc.nextLine();
                         }
@@ -166,6 +165,8 @@ public class AppTienda {
 
                 case 2 -> {
                     System.out.println("\n--- Vender producto ---");
+                    System.out.println("DISPONIBLES: ");
+                    System.out.println(inventario.mostrarInventario());
                     System.out.print("ID del producto: ");
                     int id = sc.nextInt();
                     sc.nextLine();
@@ -182,6 +183,8 @@ public class AppTienda {
 
                 case 3 -> {
                     System.out.println("\n--- Reponer producto ---");
+                    System.out.println("DISPONIBLES: ");
+                    System.out.println(inventario.mostrarInventario());
                     System.out.print("ID del producto: ");
                     int id = sc.nextInt();
                     sc.nextLine();

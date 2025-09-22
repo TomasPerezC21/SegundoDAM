@@ -39,8 +39,8 @@ public class Ropa extends Producto {
     }
 
     @Override
-    public boolean vender(int cantidad) {
-        return false;
+    public void vender(int cantidad) {
+
     }
 
     @Override

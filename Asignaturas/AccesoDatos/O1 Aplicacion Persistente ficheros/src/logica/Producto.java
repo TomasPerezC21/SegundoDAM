@@ -54,13 +54,13 @@ public abstract class Producto implements Vendible{
     public abstract double calcularPrecio();
 
     @Override
-    public boolean vender(int cantidad) {
+    public void vender(int cantidad) throws ProductoNoInventarioException{
         if (estaDisponible(cantidad)){
             stock -= cantidad;
-            return true;
+            System.out.println("Producto vendido con éxito.");
         }
         else {
-            return false;
+            throw new ProductoNoInventarioException("No se ha podido vender el producto.");
         }
     }
 

@@ -45,9 +45,8 @@ public class Electronico extends Producto {
     }
 
     @Override
-    public boolean vender(int cantidad) {
-        return false;
-    }
+    public void vender(int cantidad) {
+            }
 
     @Override
     public void reponer(int cantidad) {

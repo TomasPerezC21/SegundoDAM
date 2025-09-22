@@ -51,43 +51,61 @@ public class Inventario {
         StringBuilder resultado = new StringBuilder();
 
         for (Producto producto : listaProductos) {
-            resultado.append(producto.getNombre()).append("\n");
+            resultado.append("ID: ").append(producto.getId())
+                    .append(" - ")
+                    .append(producto.getNombre())
+                    .append("\n");
         }
 
         return resultado.toString();
     }
 
     public void venderProducto(int id, int cantidad) throws ProductoNoInventarioException {
+        if (cantidad <= 0) {
+            throw new IllegalArgumentException("La cantidad a vender debe ser mayor que cero.");
+        }
+
+        boolean encontrado = false;
 
         for (Producto producto : listaProductos) {
             if (producto.getId() == id) {
-                if(cantidad <= producto.getStock()) {
+                encontrado = true;
+                if (cantidad <= producto.getStock()) {
                     producto.setStock(producto.getStock() - cantidad);
-                    System.out.println("Vendido. Unidades restantes de " + producto.getNombre() + ": " + producto.getStock() + ".");
+                    System.out.println("Vendido. Unidades restantes de "
+                            + producto.getNombre() + ": "
+                            + producto.getStock() + ".");
+                } else {
+                    throw new ProductoNoInventarioException(
+                            "No hay " + cantidad + " unidades de "
+                                    + producto.getNombre() + ". Stock actual: "
+                                    + producto.getStock() + "."
+                    );
                 }
-                else {
-                    throw new ProductoNoInventarioException("No hay " + cantidad + " unidades de " + producto.getNombre() + ".");
-                }
+                break;
             }
-            else {
-                throw new ProductoNoInventarioException("Producto no encontrado en el inventario.");
-            }
+        }
+
+        if (!encontrado) {
+            throw new ProductoNoInventarioException(
+                    "Producto con id " + id + " no encontrado en el inventario."
+            );
         }
     }
 
     public void reponerProducto(int id, int cantidad) throws ProductoNoInventarioException {
 
         for (Producto producto : listaProductos) {
-            int cantidadAntigua =  producto.getStock();
 
             if (producto.getId() == id) {
+                int cantidadAntigua =  producto.getStock();
                 producto.setStock(producto.getStock() + cantidad);
                 System.out.println("Inventario actualizado con éxito. De " + cantidadAntigua + " a " + producto.getStock() + ".");
-            }
-            else {
-                throw new ProductoNoInventarioException("Producto no encontrado en el inventario.");
+                return;
             }
         }
+
+        throw new ProductoNoInventarioException("Producto no encontrado en el inventario.");
 
     }
 
