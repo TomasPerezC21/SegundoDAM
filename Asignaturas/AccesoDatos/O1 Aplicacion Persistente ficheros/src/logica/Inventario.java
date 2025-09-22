@@ -23,6 +23,26 @@ public class Inventario {
 
     }
 
+    public int[] getIds() {
+
+        int[] ids = new int[listaProductos.size()];
+
+        for (int i = 0; i < listaProductos.size(); i++) {
+            ids[i] = listaProductos.get(i).getId();
+        }
+            return ids;
+    }
+
+    public int contarProductos() {
+        int contador = 0;
+        for (Producto p : listaProductos) {
+            contador++;
+        }
+        return contador;
+    }
+
+
+
     public void insertarProducto(Producto producto) {
         listaProductos.add(producto);
     }
@@ -37,7 +57,7 @@ public class Inventario {
         return resultado.toString();
     }
 
-    public void VenderProducto(int id, int cantidad) throws ProductoNoInventarioException {
+    public void venderProducto(int id, int cantidad) throws ProductoNoInventarioException {
 
         for (Producto producto : listaProductos) {
             if (producto.getId() == id) {
@@ -55,7 +75,7 @@ public class Inventario {
         }
     }
 
-    public void ReponerProducto(int id, int cantidad) throws ProductoNoInventarioException {
+    public void reponerProducto(int id, int cantidad) throws ProductoNoInventarioException {
 
         for (Producto producto : listaProductos) {
             int cantidadAntigua =  producto.getStock();
@@ -69,6 +89,14 @@ public class Inventario {
             }
         }
 
+    }
+
+    public double calcularValorTotal(){
+        double total = 0;
+        for (Producto producto : listaProductos) {
+            total += producto.getStock() * producto.getPrecio();
+        }
+        return total;
     }
 
 

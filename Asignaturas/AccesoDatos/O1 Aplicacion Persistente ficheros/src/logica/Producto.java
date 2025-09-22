@@ -67,11 +67,12 @@ public abstract class Producto implements Vendible{
     @Override
     public void reponer(int cantidad) {
         stock += cantidad;
+        System.out.println("Producto repuesto con éxito.");
     }
 
     @Override
     public boolean estaDisponible(int cantidad) {
         //forma mas rapidaaaaa xd
-        return (cantidad>stock);
+        return (cantidad<=stock);
     }
 }
