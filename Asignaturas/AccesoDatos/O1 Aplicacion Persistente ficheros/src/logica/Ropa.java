@@ -30,7 +30,7 @@ public class Ropa extends Producto{
 
     @Override
     public String mostrarDetalles() {
-        return "Electronico{" +
+        return "Ropa{" +
                 "id="+getId()+
                 ", nombre='" + getNombre() + '\'' +
                 ", precio=" + getPrecio() +

@@ -1,4 +1,4 @@
-package vista;
+package front;
 
 
 import logica.*;
@@ -60,7 +60,7 @@ public class AppTienda {
             System.out.println();
             try {
                 switch (opcion) {
-                    case 1 -> opcionAñadirProducto(inventario);
+                    case 1 -> opcionAddProducto(inventario);
                     case 2 -> opcionVender(inventario);
                     case 3 -> opcionReponer(inventario);
                     case 4 -> System.out.println(inventario.mostrarInventario());
@@ -76,7 +76,8 @@ public class AppTienda {
         }
         System.out.println("¡Hasta luego!");
     }
-    private static void opcionAñadirProducto(Inventario inv) {
+
+    private static void opcionAddProducto(Inventario inv) {
         System.out.println("Tipo de producto: 1) Electrónico 2) Ropa");
         int tipo = leerEntero("Elige tipo: ");
         int id = leerEntero("ID: ");
@@ -89,17 +90,17 @@ public class AppTienda {
         if (tipo == 1) {
             String marca = leerCadena("Marca: ");
             int garantiaMeses = leerEntero("Garantía (meses): ");
+            Electronico productoE = new Electronico(id, nombre, precio, cantidad, marca, garantiaMeses);
             insertado = inv.insertarProducto(new Electronico(id, nombre, precio, cantidad, marca, garantiaMeses));
         } else if (tipo == 2) {
             String talla = leerCadena("Talla: ");
             String material = leerCadena("Material: ");
+            Ropa productoR= new Ropa(id, nombre, precio, cantidad, talla, material);
             insertado = inv.insertarProducto(new Ropa(id, nombre, precio, cantidad, talla, material));
         } else {
             System.out.println("Tipo no válido.");
             return;
         }
-
-
         if (insertado) System.out.println("Producto insertado correctamente.");
         else System.out.println("Ya existe un producto con ese ID.");
     }
