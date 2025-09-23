@@ -1,6 +1,7 @@
 package com.dam.holamundogit
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -44,6 +45,19 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.i(TAG, "estoy en onDestroy")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("nombre","Tomi")
+        Log.i(TAG, "estoy en onSaveInstanceState")
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        var miNombreRecibido = savedInstanceState.getString("nombre").toString()
+        Log.i(TAG, "estoy en onRestoreInstanceState")
+        Log.i(TAG, "He recibido $miNombreRecibido")
     }
 
 }
