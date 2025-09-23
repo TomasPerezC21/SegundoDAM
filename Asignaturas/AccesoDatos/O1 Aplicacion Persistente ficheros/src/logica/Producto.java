@@ -1,20 +1,16 @@
 package logica;
 
-public abstract class Producto implements Vendible{
-
+public abstract class  Producto implements Vendible{
     private int id;
     private String nombre;
     private double precio;
     private int stock;
 
-    public Producto(int id, String nombre, double precio, int stock) {
+    public Producto(int id, String nombre, double precio, int cantidad) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
-        this.stock = stock;
-    }
-
-    protected Producto() {
+        this.stock = cantidad;
     }
 
     public int getId() {
@@ -49,30 +45,33 @@ public abstract class Producto implements Vendible{
         this.stock = stock;
     }
 
+
+
     public abstract String mostrarDetalles();
 
     public abstract double calcularPrecio();
-
     @Override
-    public void vender(int cantidad) throws ProductoNoInventarioException{
+    public boolean vender(int cantidad) {
         if (estaDisponible(cantidad)){
-            stock -= cantidad;
-            System.out.println("Producto vendido con éxito.");
+            stock=stock-cantidad;
+            return true;
         }
         else {
-            throw new ProductoNoInventarioException("No se ha podido vender el producto.");
+            return false;
         }
     }
 
     @Override
     public void reponer(int cantidad) {
-        stock += cantidad;
-        System.out.println("Producto repuesto con éxito.");
+        stock=stock+cantidad;
+
     }
 
     @Override
     public boolean estaDisponible(int cantidad) {
-        //forma mas rapidaaaaa xd
-        return (cantidad<=stock);
+        if (cantidad>stock)
+            return false;
+        else
+            return true;
     }
 }

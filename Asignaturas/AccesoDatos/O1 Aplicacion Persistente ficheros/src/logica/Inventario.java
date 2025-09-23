@@ -3,119 +3,80 @@ package logica;
 import java.util.ArrayList;
 
 public class Inventario {
-
     private ArrayList<Producto> listaProductos;
 
     public Inventario() {
-        this.listaProductos = new ArrayList<>();
-
-        Electronico productoElectronico1 = new Electronico(1, "Tablet", 300, 8, "Samsung", 12);
+        listaProductos=new ArrayList<>();
+        Electronico productoElectronico1=new Electronico(1,"Aire acondicionado", 1000,2,"Lg", 12);
+        Electronico productoElectronico2=new Electronico(2,"Ventilador",50,5,"lg",24);
+        Ropa productoRopa1=new Ropa(3,"Camiseta",30, 4,"M","Algodon");
+        Ropa productoRopa2=new Ropa(4,"Pantalon",50, 3,"M","Algodon");
         listaProductos.add(productoElectronico1);
-
-        Electronico productoElectronico2 = new Electronico(2, "Televisión", 750, 4, "Panasonic", 24);
         listaProductos.add(productoElectronico2);
-
-        Ropa productoRopa1 = new Ropa(3, "Camiseta", 32, 4, "XL", "Algodón");
         listaProductos.add(productoRopa1);
-
-        Ropa productoRopa2 = new Ropa(4, "Pantalón", 40, 10, "L", "Lino");
         listaProductos.add(productoRopa2);
 
     }
 
-    public int[] getIds() {
-
-        int[] ids = new int[listaProductos.size()];
-
-        for (int i = 0; i < listaProductos.size(); i++) {
-            ids[i] = listaProductos.get(i).getId();
-        }
-            return ids;
+    public ArrayList<Producto> getListaProductos() {
+        return listaProductos;
     }
 
-    public int contarProductos() {
-        int contador = 0;
-        for (Producto p : listaProductos) {
-            contador++;
+    public boolean insertarProducto(Producto producto){
+        for (Producto p:listaProductos) {
+            if (p.getId() == producto.getId()) {
+                return false;
+            }
         }
-        return contador;
-    }
-
-
-
-    public void insertarProducto(Producto producto) {
         listaProductos.add(producto);
+        return true;
     }
-
     public String mostrarInventario(){
-        StringBuilder resultado = new StringBuilder();
-
-        for (Producto producto : listaProductos) {
-            resultado.append("ID: ").append(producto.getId())
-                    .append(" - ")
-                    .append(producto.getNombre())
-                    .append("\n");
+        String resultado="Listado de productos."+System.lineSeparator();
+        for(Producto p:listaProductos){
+            resultado= resultado+ p.mostrarDetalles()+System.lineSeparator();
         }
-
-        return resultado.toString();
+        return resultado;
     }
 
-    public void venderProducto(int id, int cantidad) throws ProductoNoInventarioException {
-        if (cantidad <= 0) {
-            throw new IllegalArgumentException("La cantidad a vender debe ser mayor que cero.");
-        }
-
-        boolean encontrado = false;
-
-        for (Producto producto : listaProductos) {
-            if (producto.getId() == id) {
-                encontrado = true;
-                if (cantidad <= producto.getStock()) {
-                    producto.setStock(producto.getStock() - cantidad);
-                    System.out.println("Vendido. Unidades restantes de "
-                            + producto.getNombre() + ": "
-                            + producto.getStock() + ".");
-                } else {
-                    throw new ProductoNoInventarioException(
-                            "No hay " + cantidad + " unidades de "
-                                    + producto.getNombre() + ". Stock actual: "
-                                    + producto.getStock() + "."
-                    );
+    /**
+     *
+     * @param idProducto, a vender
+     * @param cantidadVender,
+     * @return true si se vende el producto correctamente, false si no hay stock suficiente
+     * @throws ProductoNoInventarioException, el proeucto no está en el inventario.
+     */
+    public boolean venderProducto(int idProducto, int cantidadVender) throws ProductoNoInventarioException{
+        for (Producto p:listaProductos){
+            if (p.getId()==idProducto){
+                if (p.estaDisponible(cantidadVender)){
+                    p.vender(cantidadVender);
+                    return true;
                 }
-                break;
+                else{
+                    return false;
+                }
             }
         }
+        throw new ProductoNoInventarioException("El producto no esta en el inventario");
 
-        if (!encontrado) {
-            throw new ProductoNoInventarioException(
-                    "Producto con id " + id + " no encontrado en el inventario."
-            );
-        }
-    }
+       }
 
-    public void reponerProducto(int id, int cantidad) throws ProductoNoInventarioException {
+    /**
+     *
+     * @param idProducto
+     * @param cantidadReponer
+     * @return true si se repone el producto, si no está el producto devuelve ProductoNoInventarioException
+     * @throws ProductoNoInventarioException
+     */
+       public boolean reponerProducto(int idProducto, int cantidadReponer) throws ProductoNoInventarioException{
+           for (Producto p:listaProductos) {
+               if (p.getId() == idProducto) {
+                   p.reponer(cantidadReponer);
+                   return true;
+               }
+           }
+           throw  new ProductoNoInventarioException("El producto no esta en el inventario");
 
-        for (Producto producto : listaProductos) {
-
-            if (producto.getId() == id) {
-                int cantidadAntigua =  producto.getStock();
-                producto.setStock(producto.getStock() + cantidad);
-                System.out.println("Inventario actualizado con éxito. De " + cantidadAntigua + " a " + producto.getStock() + ".");
-                return;
-            }
-        }
-
-        throw new ProductoNoInventarioException("Producto no encontrado en el inventario.");
-
-    }
-
-    public double calcularValorTotal(){
-        double total = 0;
-        for (Producto producto : listaProductos) {
-            total += producto.getStock() * producto.getPrecio();
-        }
-        return total;
-    }
-
-
+       }
 }

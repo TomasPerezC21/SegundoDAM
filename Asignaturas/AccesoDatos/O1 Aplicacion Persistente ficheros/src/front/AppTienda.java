@@ -1,217 +1,124 @@
-package front;
+package vista;
 
-import logica.Electronico;
-import logica.Inventario;
-import logica.Ropa;
-import logica.ProductoNoInventarioException;
 
-import java.sql.SQLOutput;
-import java.util.Arrays;
+import logica.*;
+
 import java.util.Scanner;
 
 public class AppTienda {
 
+    private static void mostrarMenu() {
+        System.out.println("=========== TIENDA ONLINE ===========");
+        System.out.println("1) Añadir producto al inventario");
+        System.out.println("2) Vender producto");
+        System.out.println("3) Reponer producto");
+        System.out.println("4) Mostrar inventario y valor total");
+        System.out.println("0) Salir");
+        System.out.println("-------------------------------------");
+    }
+
+    private static int leerEntero(String prompt) {
+        Scanner sc=new Scanner(System.in);
+        while (true) {
+            System.out.print(prompt);
+            String s = sc.nextLine().trim();
+            try {
+                return Integer.parseInt(s);
+            } catch (NumberFormatException e) {
+                System.out.println("Introduce un número entero válido.");
+            }
+        }
+    }
+
+
+    private static double leerDouble(String prompt) {
+        Scanner sc=new Scanner(System.in);
+        while (true) {
+            System.out.print(prompt);
+            String s = sc.nextLine().trim();
+            try {
+                return Double.parseDouble(s);
+            } catch (NumberFormatException e) {
+                System.out.println("Introduce un número decimal válido (usa punto como separador).");
+            }
+        }
+    }
+
+
+    private static String leerCadena(String prompt) {
+        Scanner sc=new Scanner(System.in);
+        System.out.print(prompt);
+        return sc.nextLine().trim();
+    }
+
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
         Inventario inventario = new Inventario();
-
-        boolean seguir = true;
-
-        do {
-            System.out.println("\n====== BIENVENIDO ======");
-            System.out.println("1. Añadir productos al inventario.");
-            System.out.println("2. Vender productos.");
-            System.out.println("3. Reponer productos.");
-            System.out.println("4. Mostrar productos y valor total del inventario.");
-            System.out.println("5. Salir");
-
-            int opcion;
-            while (true) {
-                System.out.print("Elige una opción (1-5): ");
-                if (sc.hasNextInt()) {
-                    opcion = sc.nextInt();
-                    sc.nextLine();
-                    if (opcion >= 1 && opcion <= 5) break;
-                } else {
-                    sc.nextLine();
+        boolean salir = false;
+        while (!salir) {
+            mostrarMenu();
+            int opcion = leerEntero("Selecciona una opción: ");
+            System.out.println();
+            try {
+                switch (opcion) {
+                    case 1 -> opcionAñadirProducto(inventario);
+                    case 2 -> opcionVender(inventario);
+                    case 3 -> opcionReponer(inventario);
+                    case 4 -> System.out.println(inventario.mostrarInventario());
+                    case 0 -> salir = true;
+                    default -> System.out.println("Opción inválida. Intenta de nuevo.");
                 }
-                System.out.println("Opción inválida.");
+            } catch (ProductoNoInventarioException e) {
+                System.out.println("[Error Inventario] " + e.getMessage());
+            } catch (Exception e) {
+                System.out.println("[Excepción] " + e.getClass().getSimpleName() + ": " + e.getMessage());
             }
-
-            switch (opcion) {
-                case 1 -> {
-                    int tipo;
-                    while (true) {
-                        System.out.println("Tipo de producto: ");
-                        System.out.println("1. Electrónico.");
-                        System.out.println("2. Ropa.");
-                        System.out.print("Selecciona (1-2): ");
-                        tipo = sc.nextInt();
-                        if (tipo == 1 || tipo == 2) {
-                            break;
-                        } else {
-                            sc.nextLine();
-                        }
-                        System.out.println("Valor inválido.");
-                    }
-
-                    System.out.println("IDs ocupados:");
-                    int[] ids = inventario.getIds();
-                    System.out.println(Arrays.toString(ids));
+            System.out.println();
+        }
+        System.out.println("¡Hasta luego!");
+    }
+    private static void opcionAñadirProducto(Inventario inv) {
+        System.out.println("Tipo de producto: 1) Electrónico 2) Ropa");
+        int tipo = leerEntero("Elige tipo: ");
+        int id = leerEntero("ID: ");
+        String nombre = leerCadena("Nombre: ");
+        double precio = leerDouble("Precio unitario (sin IVA): ");
+        int cantidad = leerEntero("Cantidad inicial: ");
 
 
-                    int id;
-                    while (true) {
-                        System.out.print("Introduzca un ID disponible (entero positivo): ");
-                        if (!sc.hasNextInt()) {
-                            sc.nextLine();
-                            System.out.println("Debe ser un número entero.");
-                            continue;
-                        }
-                        id = sc.nextInt();
-                        sc.nextLine();
-                        if (id <= 0) {
-                            System.out.println("El ID debe ser positivo.");
-                            continue;
-                        }
-                        boolean ocupado = false;
-                        for (int j : ids) {
-                            if (j == id) {
-                                ocupado = true;
-                                break;
-                            }
-                        }
-                        if (ocupado) {
-                            System.out.println("Ese ID ya está ocupado. Vuelva a intentarlo.");
-                        } else {
-                            break;
-                        }
-                    }
+        boolean insertado = false;
+        if (tipo == 1) {
+            String marca = leerCadena("Marca: ");
+            int garantiaMeses = leerEntero("Garantía (meses): ");
+            insertado = inv.insertarProducto(new Electronico(id, nombre, precio, cantidad, marca, garantiaMeses));
+        } else if (tipo == 2) {
+            String talla = leerCadena("Talla: ");
+            String material = leerCadena("Material: ");
+            insertado = inv.insertarProducto(new Ropa(id, nombre, precio, cantidad, talla, material));
+        } else {
+            System.out.println("Tipo no válido.");
+            return;
+        }
 
 
-                    String nombre;
-                    while (true) {
-                        System.out.print("Nombre del producto: ");
-                        nombre = sc.nextLine();
-                        if (nombre.trim().isEmpty()) {
-                            System.out.println("El nombre no puede estar vacío.");
-                            continue;
-                        }
-                        if (nombre.matches("\\d+")) {
-                            System.out.println("El nombre no puede ser solo números.");
-                            continue;
-                        }
-                        break;
-                    }
+        if (insertado) System.out.println("Producto insertado correctamente.");
+        else System.out.println("Ya existe un producto con ese ID.");
+    }
 
 
-                    double precio;
-                    while (true) {
-                        System.out.print("Precio del producto (> 0): ");
-                        if (sc.hasNextDouble()) {
-                            precio = sc.nextDouble();
-                            sc.nextLine();
-                            if (precio > 0) break;
-                        } else {
-                            sc.nextLine();
-                        }
-                        System.out.println("Precio inválido.");
-                    }
+    private static void opcionVender(Inventario inv) throws ProductoNoInventarioException {
+        int id = leerEntero("ID del producto a vender: ");
+        int cant = leerEntero("Cantidad a vender: ");
+        if (inv.venderProducto(id, cant))
+            System.out.println("Venta realizada.");
+        else
+            System.out.println("No hay stock suficiente para realizar la venta");
+    }
 
-                    int cantidad;
-                    while (true) {
-                        System.out.print("Cantidad del producto (> 0): ");
-                        if (sc.hasNextInt()) {
-                            cantidad = sc.nextInt();
-                            sc.nextLine();
-                            if (cantidad > 0) break;
-                        } else {
-                            sc.nextLine();
-                        }
-                        System.out.println("Cantidad inválida.");
-                    }
 
-                    if (tipo == 1) {
-                        System.out.print("Marca del producto: ");
-                        String marca = sc.nextLine();
-
-                        int garantia;
-                        while (true) {
-                            System.out.print("Garantía (meses, >= 0): ");
-                            if (sc.hasNextInt()) {
-                                garantia = sc.nextInt();
-                                sc.nextLine();
-                                if (garantia >= 0) break;
-                            } else {
-                                sc.nextLine();
-                            }
-                            System.out.println("Garantía inválida.");
-                        }
-
-                        Electronico e = new Electronico(id, nombre, precio, cantidad, marca, garantia);
-                        inventario.insertarProducto(e);
-                        System.out.println("Producto electrónico añadido correctamente.");
-                    } else {
-                        System.out.print("Talla: ");
-                        String talla = sc.nextLine();
-                        System.out.print("Material: ");
-                        String material = sc.nextLine();
-
-                        Ropa r = new Ropa(id, nombre, precio, cantidad, talla, material);
-                        inventario.insertarProducto(r);
-                        System.out.println("Ropa añadida correctamente.");
-                    }
-                }
-
-                case 2 -> {
-                    System.out.println("\n--- Vender producto ---");
-                    System.out.println("DISPONIBLES: ");
-                    System.out.println(inventario.mostrarInventario());
-                    System.out.print("ID del producto: ");
-                    int id = sc.nextInt();
-                    sc.nextLine();
-                    System.out.print("Cantidad a vender: ");
-                    int cantidad = sc.nextInt();
-                    sc.nextLine();
-
-                    try {
-                        inventario.venderProducto(id, cantidad);
-                    } catch (ProductoNoInventarioException e) {
-                        System.out.println("Error: " + e.getMessage());
-                    }
-                }
-
-                case 3 -> {
-                    System.out.println("\n--- Reponer producto ---");
-                    System.out.println("DISPONIBLES: ");
-                    System.out.println(inventario.mostrarInventario());
-                    System.out.print("ID del producto: ");
-                    int id = sc.nextInt();
-                    sc.nextLine();
-                    System.out.print("Cantidad a añadir: ");
-                    int cantidad = sc.nextInt();
-                    sc.nextLine();
-
-                    try {
-                        inventario.reponerProducto(id, cantidad);
-                    } catch (ProductoNoInventarioException e) {
-                        System.out.println("Error: " + e.getMessage());
-                    }
-                }
-
-                case 4 -> {
-                    System.out.println("=== Inventario ===");
-                    System.out.println(inventario.mostrarInventario());
-                    System.out.println(" === VALOR TOTAL ===");
-                    System.out.println(inventario.calcularValorTotal());
-                }
-
-                case 5 -> {
-                    seguir = false;
-                    System.out.println("¡Hasta luego!");
-                }
-            }
-
-        } while (seguir);
+    private static void opcionReponer(Inventario inv) throws Exception {
+        int id = leerEntero("ID del producto a reponer: ");
+        int cant = leerEntero("Cantidad a añadir: ");
+        inv.reponerProducto(id, cant);
+        System.out.println("Reposición realizada.");
     }
 }

@@ -1,8 +1,7 @@
 package logica;
 
-public class Ropa extends Producto {
-
-    final double IVA_ROPA = 0.1;
+public class Ropa extends Producto{
+    final double IVA_ROPA=0.1;
     private String talla;
     private String material;
 
@@ -11,6 +10,7 @@ public class Ropa extends Producto {
         this.talla = talla;
         this.material = material;
     }
+
 
     public String getTalla() {
         return talla;
@@ -30,26 +30,19 @@ public class Ropa extends Producto {
 
     @Override
     public String mostrarDetalles() {
-        return "";
+        return "Electronico{" +
+                "id="+getId()+
+                ", nombre='" + getNombre() + '\'' +
+                ", precio=" + getPrecio() +
+                ", cantidad=" + getStock() +
+                ", talla='" + talla + '\'' +
+                ", material=" + material +
+                '}';
     }
 
     @Override
     public double calcularPrecio() {
-        return 0;
-    }
 
-    @Override
-    public void vender(int cantidad) {
-
-    }
-
-    @Override
-    public void reponer(int cantidad) {
-
-    }
-
-    @Override
-    public boolean estaDisponible(int cantidad) {
-        return false;
+        return getPrecio()* getStock()*IVA_ROPA;
     }
 }
