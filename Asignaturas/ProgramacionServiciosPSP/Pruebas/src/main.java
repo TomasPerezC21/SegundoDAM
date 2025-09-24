@@ -2,11 +2,14 @@ public class main {
 
     public static void main(String[] args) {
 
-        EjemploConcurrente o1 = new EjemploConcurrente("Guillermo");
-        EjemploConcurrente o2 = new EjemploConcurrente("Antonio");
+        try{
+            ProcessBuilder pb =  new ProcessBuilder("notepad.exe");
 
-        o1.start();
-        o2.start();
+            Process p = pb.start();
+
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }
 
     }
 
