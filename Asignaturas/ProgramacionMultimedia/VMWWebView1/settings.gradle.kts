@@ -19,7 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "HolaMundoGit"
-include(":app")
+rootProject.name = "VMWWebView1"
 include(":app")
  

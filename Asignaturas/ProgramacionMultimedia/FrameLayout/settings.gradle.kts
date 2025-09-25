@@ -19,7 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "HolaMundoGit"
-include(":app")
+rootProject.name = "FrameLayout"
 include(":app")
  
