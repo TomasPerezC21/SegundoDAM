@@ -76,7 +76,7 @@ public class Inventario {
                    return true;
                }
            }
-           throw  new ProductoNoInventarioException("El producto no esta en el inventario");
+           return false;
 
        }
 }

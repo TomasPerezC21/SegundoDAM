@@ -74,4 +74,9 @@ public abstract class  Producto implements Vendible{
         else
             return true;
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }

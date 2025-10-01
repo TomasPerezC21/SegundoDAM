@@ -1,6 +1,7 @@
-package vista;
+package front;
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 
 public class AppTiendaGrafica extends Application {
     private BorderPane root = new BorderPane();
-    private Inventario inventario;
+    private Inventario inventario = new Inventario();
 
     public static void main(String[] args) {
         launch(args);
@@ -25,12 +26,10 @@ public class AppTiendaGrafica extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-            inventario = new Inventario();
-
 
         MenuBar menuBar = crearMenu();
 
-       root.setTop(menuBar);
+        root.setTop(menuBar);
 
         Scene scene = new Scene(root, 800, 600);
 
@@ -85,24 +84,30 @@ public class AppTiendaGrafica extends Application {
 
         Button btn = new Button("Guardar");
         btn.setOnAction(e -> {
-            try {
-                String tipo = tipoBox.getValue();
-                int idProducto=Integer.parseInt(id.getText());
-                String nom = nombre.getText();
-                double pre = Double.parseDouble(precio.getText());
-                int sto = Integer.parseInt(stock.getText());
-                String ex1 = campoExtra1.getText();
-                String ex2 = campoExtra2.getText();
-
-                if ("Electronico".equals(tipo)) {
-                    int garantia = Integer.parseInt(ex2);
-                    inventario.insertarProducto(new Electronico(idProducto, nom, pre, sto, ex1, garantia));
-                } else if ("Ropa".equals(tipo)) {
-                    inventario.insertarProducto(new Ropa(idProducto, nom, pre, sto, ex1, ex2));
+            String tipo = tipoBox.getValue();
+            int idProducto=Integer.parseInt(id.getText());
+            String nom = nombre.getText();
+            double pre = Double.parseDouble(precio.getText());
+            int sto = Integer.parseInt(stock.getText());
+            String ex1 = campoExtra1.getText();
+            String ex2 = campoExtra2.getText();
+            if (tipo.equals("Electronico")) {
+                Electronico prodElectronico = new Electronico(idProducto, nom, pre, sto, ex1, Integer.parseInt(ex2));
+                if (inventario.insertarProducto(prodElectronico)) {
+                    showInfo("Producto insertado correctamente.");
                 }
-                showInfo("Producto insertado.");
-            } catch (Exception ex) {
-                showError("Datos inválidos o incompletos.");
+                else{
+                    showInfo("Error. El producto con ese id ya existe.");
+                }
+            }
+            else{
+                Ropa prodRopa = new Ropa(idProducto, nom, pre, sto, ex1, ex2);
+                if (inventario.insertarProducto(prodRopa)) {
+                    showInfo("Producto insertado correctamente.");
+                }
+                else{
+                    showInfo("Error. El producto con ese id ya existe.");
+                }
             }
         });
 
@@ -137,7 +142,10 @@ public class AppTiendaGrafica extends Application {
 
         table.getColumns().addAll(nombreCol, tipoCol, precioCol, stockCol);
 
-        table.getItems().addAll(inventario.getListaProductos());
+        ArrayList<Producto> listaProductos = inventario.getListaProductos();
+        for (Producto producto : listaProductos) {
+            table.getItems().add(producto);
+        }
 
         box.getChildren().add(table);
         return box;
@@ -148,33 +156,33 @@ public class AppTiendaGrafica extends Application {
         box.setPadding(new Insets(10));
 
         ComboBox<Producto> combo = new ComboBox<>();
+
+        ArrayList<Producto> listaProductos = inventario.getListaProductos();
+        for (Producto producto : listaProductos) {
+            combo.getItems().add(producto);
+        }
+
         TextField cantidadField = new TextField();
         Button btn = new Button(esVenta ? "Vender" : "Reponer");
 
-        ArrayList<Producto> productos = inventario.getListaProductos();
-        combo.getItems().addAll(productos);
 
 
         btn.setOnAction(e -> {
             Producto p = combo.getValue();
             int cantidad = Integer.parseInt(cantidadField.getText());
-            if (esVenta){
-                try {
-                    if (inventario.venderProducto(p.getId(), cantidad)) {
-                        showInfo("Venta realizada");
-                    } else {
-                        showInfo("Venta No realizada, no hay stock suficiente");
-                    }
+            if (esVenta) {
+                if (inventario.venderProducto(p.getId(), cantidad)){
+                    showInfo("Venta realizada correctamente");
                 }
-                catch (ProductoNoInventarioException ex){
-                    showError("El producto no está en el inventario");
+                else{
+                    showInfo("Error. Venta no realizada. No hay stock.");
                 }
             }
             else{
-                inventario.reponerProducto(p.getId(), cantidad);
-                showInfo("Reposición realizada");
+                if (inventario.reponerProducto(p.getId(), cantidad)){
+                    showInfo("Producto repuesto correctamente");
+                }
             }
-
 
         });
 
