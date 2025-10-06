@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import logica.*;
 
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -19,13 +20,19 @@ public class AppTiendaGrafica extends Application {
     private BorderPane root = new BorderPane();
     private Inventario inventario = new Inventario();
 
+    public AppTiendaGrafica() throws IOException {
+
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
 
+        //Falta el try catch o algo así
+        Inventario inventario = new Inventario();
 
         MenuBar menuBar = crearMenu();
 

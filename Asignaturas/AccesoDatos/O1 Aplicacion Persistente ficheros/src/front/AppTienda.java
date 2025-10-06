@@ -3,6 +3,7 @@ package front;
 
 import logica.*;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class AppTienda {
@@ -51,7 +52,7 @@ public class AppTienda {
         return sc.nextLine().trim();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Inventario inventario = new Inventario();
         boolean salir = false;
         while (!salir) {

@@ -1,21 +1,16 @@
 package logica;
 
+import java.io.*;
 import java.util.ArrayList;
 
 public class Inventario {
     private ArrayList<Producto> listaProductos;
 
-    public Inventario() {
-        listaProductos=new ArrayList<>();
-        Electronico productoElectronico1=new Electronico(1,"Aire acondicionado", 1000,2,"Lg", 12);
-        Electronico productoElectronico2=new Electronico(2,"Ventilador",50,5,"lg",24);
-        Ropa productoRopa1=new Ropa(3,"Camiseta",30, 4,"M","Algodon");
-        Ropa productoRopa2=new Ropa(4,"Pantalon",50, 3,"M","Algodon");
-        listaProductos.add(productoElectronico1);
-        listaProductos.add(productoElectronico2);
-        listaProductos.add(productoRopa1);
-        listaProductos.add(productoRopa2);
+    public final String RUTA_FICHERO_DATOS = "productos.txt";
 
+    public Inventario() throws IOException {
+        listaProductos=new ArrayList<>();
+        leerDatosFicheroTexto();
     }
 
     public ArrayList<Producto> getListaProductos() {
@@ -77,6 +72,35 @@ public class Inventario {
                }
            }
            return false;
+       }
+
+       public void leerDatosFicheroTexto() throws IOException {
+
+           FileReader fr = new FileReader(RUTA_FICHERO_DATOS);
+
+           BufferedReader br = new BufferedReader(fr);
+
+           String linea =  br.readLine();
+
+           String[] datosFichero;
+
+           while (linea != null) {
+               datosFichero = linea.split(",");
+               if (datosFichero[1].equals("Electronico")) {
+                   Electronico productoElectronico = new Electronico(Integer.parseInt(datosFichero[0]), datosFichero[2], Double.parseDouble(datosFichero[3]), Integer.parseInt(datosFichero[4]), datosFichero[5], Integer.parseInt(datosFichero[6]));
+                   listaProductos.add(productoElectronico);
+
+               }
+               else{
+                   Ropa productoRopa = new Ropa(Integer.parseInt(datosFichero[0]), datosFichero[2], Double.parseDouble(datosFichero[3]), Integer.parseInt(datosFichero[4]), datosFichero[5], datosFichero[6]);
+                   listaProductos.add(productoRopa);
+               }
+               linea = br.readLine();
+           }
+
+           br.close(); //se cierra el fichero para guardar los datos
 
        }
+
+
 }
