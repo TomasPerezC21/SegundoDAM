@@ -99,8 +99,33 @@ public class Inventario {
            }
 
            br.close(); //se cierra el fichero para guardar los datos
+       }
+
+       public void guardarDatosFichero() throws IOException {
+
+           FileWriter fw = new FileWriter(RUTA_FICHERO_DATOS);
+           BufferedWriter bw = new BufferedWriter(fw);
+
+           for (Producto p:listaProductos) {
+               if (p instanceof Electronico){
+                   Electronico productoElectronico = (Electronico) p;
+                   bw.write(productoElectronico.getId()+",Electronico,"+productoElectronico.getNombre()+","+productoElectronico.getPrecio()+","+productoElectronico.getStock()+","+productoElectronico.getStock()+","+productoElectronico.getGarantia()+","+productoElectronico.getGarantia());
+               }
+               else{
+                   Ropa productoRopa = (Ropa) p;
+                   bw.write(productoRopa.getId()+",Ropa,"+productoRopa.getNombre()+","+productoRopa.getPrecio()+","+productoRopa.getStock()+","+productoRopa.getTalla()+","+productoRopa.getTalla());
+               }
+               bw.newLine();
+           }
+           bw.close();
+           fw.close();
 
        }
 
+    public void eliminarProductoSinStock() throws IOException {
+
+           listaProductos.removeIf(p->p.getStock()<=0);
+           guardarDatosFichero();
+    }
 
 }

@@ -31,8 +31,11 @@ public class AppTiendaGrafica extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
 
-        //Falta el try catch o algo así
-        Inventario inventario = new Inventario();
+        try{
+            inventario = new Inventario();
+        }catch (Exception e){
+            showError("Error de entrada salida al fichero de texto: " + e.getMessage());
+        }
 
         MenuBar menuBar = crearMenu();
 
@@ -48,17 +51,24 @@ public class AppTiendaGrafica extends Application {
     private MenuBar crearMenu() {
         Menu menu = new Menu("Opciones");
 
-        MenuItem insertar = new MenuItem("Insertar producto");
-        MenuItem vender = new MenuItem("Vender producto");
-        MenuItem reponer = new MenuItem("Reponer producto");
-        MenuItem mostrar = new MenuItem("Mostrar inventario");
-        MenuItem salir = new MenuItem("Salir");
+        MenuItem insertar = new MenuItem("Insertar producto.");
+        MenuItem vender = new MenuItem("Vender producto.");
+        MenuItem reponer = new MenuItem("Reponer producto.");
+        MenuItem mostrar = new MenuItem("Mostrar inventario.");
+        MenuItem salir = new MenuItem("Salir y guardar.");
 
         insertar.setOnAction(e -> root.setCenter(pantallaInsertarProducto()));
         vender.setOnAction(e -> root.setCenter(pantallaVenderReponer(true)));
         reponer.setOnAction(e -> root.setCenter(pantallaVenderReponer(false)));
         mostrar.setOnAction(e -> root.setCenter(pantallaMostrarInventario()));
-        salir.setOnAction(e -> System.exit(0));
+        salir.setOnAction(e -> {
+            try {
+                inventario.guardarDatosFichero();
+            } catch (IOException ex) {
+                showError("Error de E/S a fichero: " + ex.getMessage());
+            }
+            System.exit(0);
+        });
 
         menu.getItems().addAll(insertar, vender, reponer, mostrar, salir);
 
