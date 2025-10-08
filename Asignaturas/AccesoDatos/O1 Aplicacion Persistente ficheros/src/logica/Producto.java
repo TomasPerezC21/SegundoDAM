@@ -1,6 +1,9 @@
 package logica;
 
-public abstract class  Producto implements Vendible{
+import java.io.Serializable;
+
+public abstract class  Producto implements Vendible, Serializable {
+    private static final long serialVersionUID = 1L;
     private int id;
     private String nombre;
     private double precio;

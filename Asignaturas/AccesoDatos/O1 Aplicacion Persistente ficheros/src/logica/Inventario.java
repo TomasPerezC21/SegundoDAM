@@ -107,6 +107,7 @@ public class Inventario {
            BufferedWriter bw = new BufferedWriter(fw);
 
            for (Producto p:listaProductos) {
+
                if (p instanceof Electronico){
                    Electronico productoElectronico = (Electronico) p;
                    bw.write(productoElectronico.getId()+",Electronico,"+productoElectronico.getNombre()+","+productoElectronico.getPrecio()+","+productoElectronico.getStock()+","+productoElectronico.getStock()+","+productoElectronico.getGarantia()+","+productoElectronico.getGarantia());
@@ -122,10 +123,25 @@ public class Inventario {
 
        }
 
-    public void eliminarProductoSinStock() throws IOException {
-
+    public void eliminarProductoSinStock() {
            listaProductos.removeIf(p->p.getStock()<=0);
-           guardarDatosFichero();
     }
 
+    public void actualizarFichero() throws IOException {
+        eliminarProductoSinStock();  // Limpia la lista en memoria
+        guardarDatosFichero();        // Vuelca la lista actualizada al archivo
+    }
+
+    public void escribirFicheroBinario() throws IOException {
+
+           FileOutputStream fos = new FileOutputStream("productos.dat");
+           ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+           for (Producto p:listaProductos) {
+               oos.writeObject(p);
+           }
+           oos.close();
+           fos.close();
+
+    }
 }

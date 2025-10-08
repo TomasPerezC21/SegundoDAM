@@ -1,4 +1,3 @@
-1,Electronico,Smartphone,699.99,10,10,24,24
 2,Electronico,Laptop,1200.5,5,5,36,36
 3,Electronico,Televisor,850.0,7,7,24,24
 4,Electronico,Tablet,450.75,12,12,18,18
@@ -9,3 +8,4 @@
 9,Ropa,Abrigo,120.0,8,XL,XL
 10,Ropa,Sombrero,25.5,5,Única,Única
 145,Electronico,acza,153.0,56,56,1,1
+1,Electronico,Smartphone,124.0,1,1,12,12

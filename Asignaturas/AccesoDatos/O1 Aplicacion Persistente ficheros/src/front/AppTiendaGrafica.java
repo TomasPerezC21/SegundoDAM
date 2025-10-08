@@ -63,7 +63,8 @@ public class AppTiendaGrafica extends Application {
         mostrar.setOnAction(e -> root.setCenter(pantallaMostrarInventario()));
         salir.setOnAction(e -> {
             try {
-                inventario.guardarDatosFichero();
+                inventario.actualizarFichero();
+                inventario.escribirFicheroBinario();
             } catch (IOException ex) {
                 showError("Error de E/S a fichero: " + ex.getMessage());
             }
