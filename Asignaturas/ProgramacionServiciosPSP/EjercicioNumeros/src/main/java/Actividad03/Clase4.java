@@ -1,6 +1,8 @@
 package Actividad03;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Random;
 
@@ -19,10 +21,19 @@ public class Clase4 {
             Process p = pb.start();
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
 
-            for (int i = 1; i <= 5; i++) {
-                bw.write(generarAleatorios());
+            for (int i = 1; i < 5; i++) {
+                bw.write(String.valueOf(generarAleatorios()));
+                bw.write("\n");
             }
+            bw.flush();
+            bw.close();
 
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                System.out.println("Salida de Clase3: " + linea);
+            }
 
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -35,11 +46,8 @@ public class Clase4 {
 
         Random rand = new Random();
 
+        return rand.nextInt(30) + 1;
 
-
-        for (int i = 0; i < 5; i++) return rand.nextInt(1, 30) + 1;
-
-        return 0;
     }
 
 
