@@ -1,9 +1,6 @@
 package Actividad03;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.util.Random;
 
 public class Clase4 {
@@ -15,6 +12,10 @@ public class Clase4 {
         String rutaFichero = "C:\\Users\\alumno\\Documents\\SegundoDAMTomasPerez\\Asignaturas\\ProgramacionServiciosPSP\\EjercicioNumeros\\src\\main\\java\\Actividad03\\Clase3.java";
 
         ProcessBuilder pb = new ProcessBuilder("java", rutaFichero);
+
+        File f = new File("suma.txt");
+
+        pb.redirectOutput(f);
 
         try {
 
@@ -29,11 +30,18 @@ public class Clase4 {
             bw.close();
 
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            p.waitFor();
+
+            FileReader fr = new FileReader(f);
+            BufferedReader br = new BufferedReader(fr);
+
             String linea;
+
             while ((linea = br.readLine()) != null) {
                 System.out.println("Salida de Clase3: " + linea);
             }
+
+
 
         }catch (Exception e){
             System.out.println(e.getMessage());
