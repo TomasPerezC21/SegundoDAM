@@ -46,32 +46,47 @@ class MainActivity : AppCompatActivity() {
     //metodo que realiza las operaciones en base a la variable que envía cada botón
     private fun operar(operacion: String) {
 
-        val numero1 = et1.text.toString().toDouble()
-        val numero2 = et2.text.toString().toDouble()
+        val numero1 = et1.text.toString()
+        val numero2 = et2.text.toString()
+
+        if (numero1.isBlank() || numero1.isEmpty() || numero2.isBlank() || numero2.isEmpty()){
+
+            result.text = "Tienes que ingresar ambos números"
+
+            return
+        }
+
+        val num1 = numero1.toDouble()
+        val num2 = numero2.toDouble()
+
         var resultado: Double
 
-
-        if (operacion == "suma"){
-            resultado = numero1 + numero2
-            result.text = ("Resultado: $resultado")
+        if  (operacion == "suma"){
+            resultado = num1 + num2
+            result.text = resultado.toString()
         }
 
         if (operacion == "resta"){
-            resultado = numero1 - numero2
-            result.text = ("Resultado: $resultado")
+            resultado = num1 - num2
+            result.text = resultado.toString()
         }
 
         if (operacion == "multi"){
-            resultado = numero1 * numero2
-            result.text = ("Resultado: $resultado")
+            resultado = num1 * num2
+            result.text = resultado.toString()
         }
 
-        if (operacion == "div"){
-            resultado = numero1 / numero2
-            result.text = ("Resultado: $resultado")
+        if (operacion == "div") {
+
+            if (num2 == 0.0) {
+                result.text = "No se puede dividir entre 0"
+            } else {
+                resultado = num1 / num2
+                result.text = resultado.toString()
+
+
+            }
+
         }
-
-
-    }
-
+}
 }
