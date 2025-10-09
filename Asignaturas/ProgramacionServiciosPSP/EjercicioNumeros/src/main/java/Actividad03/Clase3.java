@@ -14,7 +14,7 @@ public class Clase3 {
             resultado+=sc.nextInt();
         }
 
-        System.out.println("Suma total: " +resultado);
+        System.out.println(resultado);
 
 
     }

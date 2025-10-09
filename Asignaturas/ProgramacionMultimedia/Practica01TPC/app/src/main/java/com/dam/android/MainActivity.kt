@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         //Asignacion de las partes del layout
         et1 = findViewById(R.id.Texto1)
 
@@ -42,7 +43,6 @@ class MainActivity : AppCompatActivity() {
         et2.setOnClickListener { et2.text.clear() }
 
     }
-
     //metodo que realiza las operaciones en base a la variable que envía cada botón
     private fun operar(operacion: String) {
 
