@@ -7,7 +7,7 @@
 
 
     <EditText
-        android:id="@+id/editTextNumberSigned"
+        android:id="@+id/Texto1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -15,7 +15,7 @@
         android:text="Introduce un número: " />
 
     <EditText
-        android:id="@+id/editTextNumber2"
+        android:id="@+id/Texto2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -33,29 +33,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="SUM" />
+            android:text="SUM"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"/>
         <Button
             android:id="@+id/botonResta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="RES" />
+            android:text="RES"
+            android:layout_marginRight="5dp"/>
         <Button
             android:id="@+id/botonMulti"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="MULTI" />
+            android:text="MULTI"
+            android:layout_marginRight="5dp"/>
         <Button
             android:id="@+id/botonDiv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="DIV" />
+            android:text="DIV"
+            android:layout_marginRight="5dp"/>
 
     </LinearLayout>
 
     <TextView
+        android:id="@+id/resultado"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Resultado"
