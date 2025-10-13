@@ -9,3 +9,4 @@
 10,Ropa,Sombrero,25.5,5,Única,Única
 145,Electronico,acza,153.0,56,56,1,1
 1,Electronico,Smartphone,124.0,1,1,12,12
+23,Electronico,kalewistico,120.0,5,5,12,12

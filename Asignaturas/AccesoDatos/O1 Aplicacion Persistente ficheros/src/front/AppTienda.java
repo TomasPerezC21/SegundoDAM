@@ -52,7 +52,7 @@ public class AppTienda {
         return sc.nextLine().trim();
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         Inventario inventario = new Inventario();
         boolean salir = false;
         while (!salir) {

@@ -1,5 +1,6 @@
 package logica;
 
+import java.awt.font.FontRenderContext;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -7,10 +8,12 @@ public class Inventario {
     private ArrayList<Producto> listaProductos;
 
     public final String RUTA_FICHERO_DATOS = "productos.txt";
+    public final String RUTA_FICHEROS_BINARIOS = "productos.dat";
 
-    public Inventario() throws IOException {
+    public Inventario() throws IOException, ClassNotFoundException {
         listaProductos=new ArrayList<>();
-        leerDatosFicheroTexto();
+        //leerDatosFicheroTexto();
+        leerFicheroBinario();
     }
 
     public ArrayList<Producto> getListaProductos() {
@@ -134,14 +137,24 @@ public class Inventario {
 
     public void escribirFicheroBinario() throws IOException {
 
-           FileOutputStream fos = new FileOutputStream("productos.dat");
+           FileOutputStream fos = new FileOutputStream(RUTA_FICHEROS_BINARIOS);
            ObjectOutputStream oos = new ObjectOutputStream(fos);
 
-           for (Producto p:listaProductos) {
-               oos.writeObject(p);
-           }
+           oos.writeObject(listaProductos);
            oos.close();
            fos.close();
+    }
+
+    public void leerFicheroBinario() throws IOException, ClassNotFoundException {
+
+           FileInputStream fis = new FileInputStream("productos.dat");
+           ObjectInputStream ois = new ObjectInputStream(fis);
+
+           listaProductos = (ArrayList<Producto>) ois.readObject();
+
+           fis.close();
+           ois.close();
 
     }
+
 }

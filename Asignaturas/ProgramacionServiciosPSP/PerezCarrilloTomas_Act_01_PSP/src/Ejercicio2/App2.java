@@ -9,9 +9,8 @@ public class App2 {
     public static void main(String[] args) {
 
         String[] palabras = args[0].split(" ");
-        ArrayList<String> palabras2 = new ArrayList<>();
 
-        palabras2.addAll(Arrays.asList(palabras));
+        ArrayList<String> palabras2 = new ArrayList<>(Arrays.asList(palabras));
         Collections.sort(palabras2);
         Collections.reverse(palabras2);
 

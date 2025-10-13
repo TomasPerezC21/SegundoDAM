@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class AppTiendaGrafica extends Application {
     private BorderPane root = new BorderPane();
-    private Inventario inventario = new Inventario();
+    private Inventario inventario;
 
     public AppTiendaGrafica() throws IOException {
 
