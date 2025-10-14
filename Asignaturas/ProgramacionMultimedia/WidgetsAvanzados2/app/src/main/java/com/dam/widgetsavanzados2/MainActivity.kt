@@ -49,6 +49,18 @@ class MainActivity : AppCompatActivity() {
         peliculas.add(Pelicula("El lobo de Wall Street", "Martin Scorsese"))
         peliculas.add(Pelicula("El exorcista", "Francis Ford Coppola"))
         peliculas.add(Pelicula ("The Batman", "Matt Reeves"))
+        peliculas.add(Pelicula("Star Wars", "George Lucas"))
+        peliculas.add(Pelicula("Thor", "Taika Waititi"))
+        peliculas.add(Pelicula ("Iron Man", "Jodatos_pelisn Favreau"))
+        peliculas.add(Pelicula("Los vengadores", "James Gunn"))
+        peliculas.add(Pelicula("Los juegos del hambre", "Gary Ross"))
+        peliculas.add(Pelicula ("Oppenheimer", "Christopher Nolan"))
+        peliculas.add(Pelicula("Saw", "James Wan"))
+        peliculas.add(Pelicula("Dune", "Denis Villeneuve"))
+        peliculas.add(Pelicula ("El padrino", "Francis Ford Coppola"))
+        peliculas.add(Pelicula("El lobo de Wall Street", "Martin Scorsese"))
+        peliculas.add(Pelicula("El exorcista", "Francis Ford Coppola"))
+        peliculas.add(Pelicula ("The Batman", "Matt Reeves"))
 
         val adaptadorRecyclerView = AdaptadorPeliculas(peliculas)
 

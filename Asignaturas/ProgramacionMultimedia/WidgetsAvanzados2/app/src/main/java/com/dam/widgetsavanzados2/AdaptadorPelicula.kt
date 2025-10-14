@@ -34,8 +34,10 @@ class AdaptadorPeliculas(datosPelis: MutableList<Pelicula>) :
     override fun onBindViewHolder(holder: ViewHolderPelicula, position: Int) {
         // Dibujar la fila de la peli con los datos de la peli actualmente solicitada según la variable position
         val peli: Pelicula = this.peliculas[position]
-        holder.textViewTitulo.text = peli.titulo
-        holder.textViewDirector.text = peli.director
-        Log.d("recycler", position.toString());
+        holder.bind(peli)
+        Log.d("recycler", position.toString())
+        holder.textViewTitulo.setOnClickListener {
+            Log.d("recycler", peli.titulo)
+        }
     }
 }
