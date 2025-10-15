@@ -22,7 +22,7 @@ public class App1 {
         //Borrar último espacio
         palabrasEspacio.deleteCharAt(palabrasEspacio.length() - 1);
 
-        String rutaApp2 = "C:\\Users\\alumno\\Documents\\SegundoDAMTomasPerez\\Asignaturas\\ProgramacionServiciosPSP\\PerezCarrilloTomas_Act_01_PSP\\src\\Ejercicio2\\App2.java";
+        String rutaApp2 ="src/Ejercicio2/App2.java";
 
         ProcessBuilder pb = new ProcessBuilder("java", rutaApp2, palabrasEspacio.toString());
 

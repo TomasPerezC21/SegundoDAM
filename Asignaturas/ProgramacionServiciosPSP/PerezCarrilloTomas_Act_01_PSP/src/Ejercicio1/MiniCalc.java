@@ -9,26 +9,20 @@ public class MiniCalc {
         char operador = args[2].charAt(0);
         
         int resultado = 0;
-        
-        if (args.length == 0) {
-            System.out.println("No has introducido nada.");
-        }
-        
-        else{
-            switch (operador) {
-                case '+':
-                    resultado = numero1 + numero2;
-                    break;
-                case  '-':
-                    resultado = numero1 - numero2;
-                    break;
-                case '*':
-                    resultado = numero1 * numero2;
-                    break;
-                case  '/':
-                    resultado = numero1 / numero2;
-                    break;
-            }
+
+        switch (operador) {
+            case '+':
+                resultado = numero1 + numero2;
+                break;
+            case '-':
+                resultado = numero1 - numero2;
+                break;
+            case '*':
+                resultado = numero1 * numero2;
+                break;
+            case '/':
+                resultado = numero1 / numero2;
+                break;
         }
 
         System.out.println("Resultado de minicalc: " + resultado);

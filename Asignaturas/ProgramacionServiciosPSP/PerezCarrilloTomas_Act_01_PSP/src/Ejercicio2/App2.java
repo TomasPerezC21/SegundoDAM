@@ -22,7 +22,7 @@ public class App2 {
         //Borramos último espacio
         sb.deleteCharAt(sb.length()-1);
 
-        System.out.println("Palabras ordenadas revertidas: " +sb);
+        System.out.println("Palabras ordenadas a la inversa: " +sb);
 
 
 

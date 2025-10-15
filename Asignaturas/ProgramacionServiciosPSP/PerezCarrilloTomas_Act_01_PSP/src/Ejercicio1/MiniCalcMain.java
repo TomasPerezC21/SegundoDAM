@@ -20,9 +20,9 @@ public class MiniCalcMain {
         char operador = sc.next().charAt(0);
         String operadorString = String.valueOf(operador);
 
-        String rutaClaseHija = "C:\\Users\\alumno\\Documents\\SegundoDAMTomasPerez\\Asignaturas\\ProgramacionServiciosPSP\\PerezCarrilloTomas_Act_01_PSP\\src\\Ejercicio1\\MiniCalc.java";
+        String claseEje = "src/Ejercicio1/MiniCalc.java";
 
-        ProcessBuilder pb = new ProcessBuilder("java", rutaClaseHija, valor1String, valor2String, operadorString);
+        ProcessBuilder pb = new ProcessBuilder("java", claseEje, valor1String, valor2String, operadorString);
 
         try {
             pb.inheritIO();
