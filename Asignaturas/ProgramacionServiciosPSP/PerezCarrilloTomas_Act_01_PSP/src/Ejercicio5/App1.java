@@ -14,7 +14,6 @@ public class App1 {
         System.out.println("Introduce un numero: ");
         int numero = sc.nextInt();
 
-
         while(numero > 0){
             System.out.println( "(Introduce 0 o negativo si quieres parar)."
                     + System.lineSeparator()+  "Introduce un numero: ");
@@ -24,7 +23,6 @@ public class App1 {
         }
 
         //Paso la lista a una lista de Strings
-
         String[] listaString = new String[lista.size()];
         for (int i = 0; i < lista.size(); i++) {
             listaString[i] = lista.get(i).toString();

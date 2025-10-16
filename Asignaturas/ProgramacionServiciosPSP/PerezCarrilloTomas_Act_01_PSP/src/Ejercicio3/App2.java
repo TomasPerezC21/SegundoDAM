@@ -42,7 +42,7 @@ public class App2 {
             try{
                 Process p = pb.start();
 
-                int segundos = r.nextInt(4) + 2;
+                int segundos = r.nextInt(2, 6) ;
 
                 System.out.println("Llamada: " + (i + 1) + ". Ha tardado: " + segundos + " segundos.");
 

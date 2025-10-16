@@ -22,7 +22,7 @@ public class App2 {
 
         //Añado esta condición para que mínimo la lista tenga dos números y evitar errores
         if (lista.isEmpty() || lista.size() < 2) {
-            System.out.println("No hay números válidos.");
+            System.out.println("No hay números suficientes. Tienen que ser mínimo 2.");
             System.exit(1);
         }
 
@@ -32,7 +32,6 @@ public class App2 {
 
         //Media
         double media = suma / lista.size();
-
         //Menor
         int menor = Collections.min(lista);
 
@@ -47,14 +46,12 @@ public class App2 {
         }
 
         //Número más repetido
-
         int moda = lista.get(0);
         int mejorConteo = 1;
 
         int numActual = lista.get(0);
         int conteoActual = 1;
 
-        //Empiezo a mirar el siguiente numero
         for (int i = 1; i < lista.size(); i++) {
             if (lista.get(i)==numActual) {
                 conteoActual++;
@@ -73,6 +70,7 @@ public class App2 {
             mejorConteo = conteoActual;
         }
 
+        //Salida hacia app1 con los resultados
         System.out.println("Dos números mayores: " + Arrays.toString(top2));
         System.out.println("Menor número: " + menor);
         System.out.println("Media: " + media);
