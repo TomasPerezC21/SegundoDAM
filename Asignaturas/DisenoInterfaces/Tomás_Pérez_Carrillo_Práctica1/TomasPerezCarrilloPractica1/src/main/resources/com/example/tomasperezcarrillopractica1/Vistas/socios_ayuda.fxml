@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ScrollPane fitToWidth="true" layoutX="131.0" layoutY="114.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="8.0">
+               <padding>
+                  <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+               </padding>
+               <children>
+                  <Label text="Ayuda / Tutorial" />
+                  <Label ellipsisString="" text="Esta aplicación permite gestionar un gimnasio de forma sencilla. Incluye un listado de socios, un formulario de mantenimiento y esta sección de ayuda." wrapText="true" />
+                  <Hyperlink text="Más información (decoración)" />
+                  <Accordion>
+                    <panes>
+                      <TitledPane animated="false" text="1. Navegación">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        </content>
+                           <graphic>
+                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="6.0">
+                                 <padding>
+                                    <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                                 </padding>
+                                 <children>
+                                    <Label text="Desde el menú principal puedes acceder a las tres pantallas: Listado de Socios, Mantenimiento de Socios y esta sección de Ayuda." wrapText="true" />
+                                 </children>
+                              </VBox>
+                           </graphic>
+                      </TitledPane>
+                      <TitledPane animated="false" text="2. Listado de socios">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        </content>
+                           <graphic>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="En esta pantalla se muestran todos los socios en una tabla.A la izquierda hay filtros con desplegables y listas para buscar más fácil." wrapText="true" />
+                                 </children>
+                              </VBox>
+                           </graphic>
+                      </TitledPane>
+                      <TitledPane animated="false" text="3. Mantenimiento">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        </content>
+                           <graphic>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="Aquí puedes añadir, editar o eliminar la información de un socio.Incluye campos de texto, fecha, opciones y otros controles del formulario." wrapText="true" />
+                                 </children>
+                              </VBox>
+                           </graphic>
+                      </TitledPane>
+                    </panes>
+                  </Accordion>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
