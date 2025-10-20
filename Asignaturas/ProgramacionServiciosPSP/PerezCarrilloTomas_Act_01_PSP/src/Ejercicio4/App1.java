@@ -32,7 +32,7 @@ public class App1 {
             mayor = Integer.parseInt(args[0]);
         }
 
-        int aleatorio = r.nextInt(menor, mayor + 1);
+        int tempAleatorio = r.nextInt(menor, mayor + 1);
 
         String nombreFichero = args[2];
 
@@ -40,13 +40,16 @@ public class App1 {
 
         try {
             FileWriter fw = new FileWriter(fichero, true);
-            fw.write(fecha + " " + horaActual + " Temperatura: " + aleatorio + System.lineSeparator());
+            fw.write(fecha + " " + horaActual + " Temperatura: " + tempAleatorio + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
+
     }
+
+
 
 
 }
