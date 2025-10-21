@@ -1,9 +1,13 @@
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
 
         try{
             Connection conex = crearConexion();
@@ -14,9 +18,17 @@ public class Main {
 //            if (filas > 0){
 //                System.out.println("Precio modificado correctamente. Filas modificadas: " +filas );
 //            }
-            for (Producto p : obtenerProductos(conex)){
+//            for (Producto p : obtenerProductos(conex)){
+//                System.out.println(p);
+//            }
+            System.out.println("Introduce un precio para ver los items que cuesten más: ");
+            double precio = sc.nextDouble();
+            sc.close();
+
+            for(Producto p : verPrecio(conex, precio)){
                 System.out.println(p);
             }
+
         }catch (SQLException e){
             System.out.println("Error en la conexión: " + e.getMessage());
         }
@@ -69,6 +81,23 @@ public class Main {
         }
 
         return productos;
+    }
+
+    public static ArrayList<Producto> verPrecio(Connection cn, double precio) throws SQLException{
+
+        String sql = "SELECT id, nombre, precio, cantidad\n" +
+                "FROM productos where precio >?;";
+
+        PreparedStatement pst = cn.prepareStatement(sql);
+        pst.setDouble(1, precio);
+        ResultSet rs = pst.executeQuery();
+        ArrayList<Producto> productos = new ArrayList<>();
+
+        while(rs.next()){
+            Producto p = new Producto(rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getInt(4));
+        }
+
+
     }
 
 }
