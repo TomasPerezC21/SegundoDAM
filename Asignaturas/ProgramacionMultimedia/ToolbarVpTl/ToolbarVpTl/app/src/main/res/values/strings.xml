@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ToolbarVpTl</string>
+    <string name="action_buscar">Buscar</string>
+    <string name="archivo">Archivo</string>
+    <string name="action_opciones">opciones</string>
+    <string name="action_salir">salir</string>
+    <string name="action_borrar">borrar</string>
+</resources>
