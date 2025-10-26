@@ -22,7 +22,7 @@ public class App2 {
 
         for (int i = 0; i < listaUsuarios.size(); i++) {
             try {
-                FileWriter fw = new FileWriter(fichero);
+                FileWriter fw = new FileWriter(fichero, true);
                 BufferedWriter bw = new BufferedWriter(fw);
                 String[]datos =  listaUsuarios.get(i).split(" ");
                 String metodo = datos[2];

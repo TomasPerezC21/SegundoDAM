@@ -1,4 +1,5 @@
-import java.io.File;
+package EjemplosPDF;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -11,6 +12,9 @@ public class Ejemplo3 {
         Scanner sc = new Scanner(System.in);
         String directorio = sc.nextLine();
         crearFichero(directorio);
+
+
+
     }
 
     public static void crearFichero(String rutaFichero) {
