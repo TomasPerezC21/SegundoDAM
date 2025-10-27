@@ -133,7 +133,7 @@ public class A08Gpt {
             Element elemento = (Element) libros.item(i);
             System.out.print(elemento.getElementsByTagName("titulo").item(0).getTextContent() + " ");
             System.out.println(elemento.getElementsByTagName("autor").item(0).getTextContent());
-            System.out.println(elemento.getElementsByTagName("anio").item(0).getTextContent());   // <= "anio"
+            System.out.println(elemento.getElementsByTagName("anio").item(0).getTextContent());
             System.out.println(elemento.getElementsByTagName("genero").item(0).getTextContent());
         }
     }

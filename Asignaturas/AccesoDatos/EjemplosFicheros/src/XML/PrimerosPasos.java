@@ -9,9 +9,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.File;
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 
 public class PrimerosPasos {
@@ -99,14 +97,19 @@ public class PrimerosPasos {
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document documento = builder.parse(new File("fichero.xml"));
 
+        File file = new File("src/Archivos/productos.txt");
+        FileWriter fw = new FileWriter(file);
+        BufferedWriter bw = new BufferedWriter(fw);
+
         NodeList productos = documento.getElementsByTagName("producto");
         for (int i = 0; i < productos.getLength(); i++) {
-            Node producto = productos.item(i);
-            Element elemento  = (Element) producto;
-            System.out.print(elemento.getElementsByTagName("nombre").item(0).getChildNodes().item(0).getTextContent() + " ");
-            System.out.println(elemento.getElementsByTagName("precio").item(0).getChildNodes().item(0).getTextContent());
+            Node nodoProducto = productos.item(i);
+            Element producto1  = (Element) nodoProducto;
+            //bw.write(producto1.getElementsByTagName("nombre").item(0).getTextContent() + " " + producto1.getElementsByTagName("precio").item(0).getTextContent()+ " ");
+            System.out.print(producto1.getElementsByTagName("nombre").item(0).getChildNodes().item(0).getTextContent() + " ");
+            System.out.println(producto1.getElementsByTagName("precio").item(0).getChildNodes().item(0).getTextContent() + " ");
         }
-
+        bw.close();
 
     }
 

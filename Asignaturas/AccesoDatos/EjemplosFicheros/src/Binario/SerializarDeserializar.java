@@ -60,14 +60,6 @@ public class SerializarDeserializar {
             serializador.writeObject(listaProductos);
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }finally {
-            if (serializador != null) {
-                try {
-                    serializador.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
 
     }
@@ -79,6 +71,7 @@ public class SerializarDeserializar {
             productosLeerArchivo = (ArrayList<Producto>) deserializar.readObject();
             System.out.println("Productos leidos desde archivo: ");
             for (Producto producto : productosLeerArchivo) {
+
                 System.out.println(producto.getNombre() + " " + producto.getPrecio());
             }
         } catch (Exception e) {

@@ -1,0 +1,3 @@
+A04. Crear un programa que reciba el nombre de un fichero y una palabra (esta palabra se
+debe pedir en el programa por terminal) y nos devuelva un entero con la fila en la que la
+cadena se encuentra (si no se encuentra devuelve -1).
