@@ -1,4 +1,4 @@
-package org.example.alvaroguy_practica2_1;
+package org.tomasperezpractica2.practica2tomasperez;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
