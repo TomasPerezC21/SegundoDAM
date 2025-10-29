@@ -103,9 +103,9 @@ public class PrimerosPasos {
 
         NodeList productos = documento.getElementsByTagName("producto");
         for (int i = 0; i < productos.getLength(); i++) {
-            Node nodoProducto = productos.item(i);
-            Element producto1  = (Element) nodoProducto;
-            //bw.write(producto1.getElementsByTagName("nombre").item(0).getTextContent() + " " + producto1.getElementsByTagName("precio").item(0).getTextContent()+ " ");
+            //Node nodoProducto = productos.item(i);
+            Element producto1  = (Element) productos.item(i);
+            bw.write(producto1.getElementsByTagName("nombre").item(0).getTextContent() + " " + producto1.getElementsByTagName("precio").item(0).getTextContent()+ " ");
             System.out.print(producto1.getElementsByTagName("nombre").item(0).getChildNodes().item(0).getTextContent() + " ");
             System.out.println(producto1.getElementsByTagName("precio").item(0).getChildNodes().item(0).getTextContent() + " ");
         }
