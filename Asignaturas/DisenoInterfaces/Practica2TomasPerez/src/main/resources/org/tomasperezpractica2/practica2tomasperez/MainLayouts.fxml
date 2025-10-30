@@ -12,6 +12,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -164,17 +165,20 @@
                   <Font name="Alef Bold" size="14.0" />
                </font>
             </Label>
-            <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" />
+            <PasswordField text="123456789" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField promptText="(Name and surname)" GridPane.columnIndex="1" />
             <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <RadioButton mnemonicParsing="false" text="Female" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <RadioButton mnemonicParsing="false" selected="true" text="Female" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="180.0" />
                </GridPane.margin>
+               <toggleGroup>
+                  <ToggleGroup fx:id="Grupo" />
+               </toggleGroup>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" text="Male" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <CheckBox mnemonicParsing="false" text="Java" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <CheckBox mnemonicParsing="false" text="Electron" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <RadioButton mnemonicParsing="false" selected="true" text="Male" toggleGroup="$Grupo" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <CheckBox allowIndeterminate="true" mnemonicParsing="false" text="Java" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <CheckBox allowIndeterminate="true" mnemonicParsing="false" text="Electron" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="180.0" />
                </GridPane.margin>
@@ -212,8 +216,8 @@
    <bottom>
       <AnchorPane prefHeight="38.0" prefWidth="750.0" BorderPane.alignment="CENTER">
          <children>
-            <Slider layoutX="517.0" layoutY="13.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="100.0" />
-            <Button layoutX="676.0" layoutY="7.0" mnemonicParsing="false" text="Enviar" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="40.0" />
+            <Slider blockIncrement="1.0" layoutX="509.0" layoutY="7.0" majorTickUnit="2.0" max="10.0" minorTickCount="2" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="101.0" />
+            <Button defaultButton="true" layoutX="658.0" layoutY="2.0" mnemonicParsing="false" text="Enviar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="44.0" />
          </children>
       </AnchorPane>
    </bottom>
