@@ -19,13 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Practica3.PMDM.TomasPerez"
-include(":app")
-include(":app")
-include(":app")
-include(":app")
-include(":app")
-include(":app")
-include(":app")
+rootProject.name = "RetrofitAutores"
 include(":app")
  
