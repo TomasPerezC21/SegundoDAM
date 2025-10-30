@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
@@ -157,14 +159,25 @@
                   <Font name="Alef Bold" size="14.0" />
                </font>
             </Label>
-            <Label text="Location" GridPane.rowIndex="6">
-               <GridPane.margin>
-                  <Insets left="40.0" />
-               </GridPane.margin>
-               <font>
-                  <Font name="Alef Bold" size="14.0" />
-               </font>
-            </Label>
+             <Label text="Location" GridPane.rowIndex="6">
+                 <GridPane.margin>
+                     <Insets left="40.0" />
+                 </GridPane.margin>
+                 <font>
+                     <Font name="Alef Bold" size="14.0" />
+                 </font>
+             </Label>
+
+             <!-- Aquí agregamos el ChoiceBox en la misma fila (6) y columna (1) -->
+             <ChoiceBox fx:id="choiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                 <items>
+                     <FXCollections fx:factory="observableArrayList">
+                         <String fx:value="Option 1" />
+                         <String fx:value="Option 2" />
+                         <String fx:value="Option 3" />
+                     </FXCollections>
+                 </items>
+             </ChoiceBox>
             <PasswordField text="123456789" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField promptText="(Name and surname)" GridPane.columnIndex="1" />
             <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="2" />
