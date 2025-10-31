@@ -54,9 +54,24 @@ public class AppTiendaGrafica extends Application {
         MenuItem salir = new MenuItem("Salir y guardar");
 
         insertar.setOnAction(e -> root.setCenter(pantallaInsertarProducto()));
-        vender.setOnAction(e -> root.setCenter(pantallaVenderReponer(true)));
-        reponer.setOnAction(e -> root.setCenter(pantallaVenderReponer(false)));
-        mostrar.setOnAction(e -> root.setCenter(pantallaMostrarInventario()));
+
+        vender.setOnAction(e -> {
+                root.setCenter(pantallaVenderReponer(true));
+        });
+
+        reponer.setOnAction(e -> {
+                root.setCenter(pantallaVenderReponer(false));
+        });
+
+        mostrar.setOnAction(e -> {
+            try {
+                root.setCenter(pantallaMostrarInventario());
+            } catch (SQLException ex) {
+                showError("Error al mostrar inventario");;
+            }
+
+        });
+
         salir.setOnAction(e -> {
 
 
@@ -134,7 +149,7 @@ public class AppTiendaGrafica extends Application {
 
         return grid;
     }
-    private VBox pantallaMostrarInventario() {
+    private VBox pantallaMostrarInventario() throws SQLException {
         VBox box = new VBox(10);
         box.setPadding(new Insets(10));
         TableView<Producto> table = new TableView<>();
@@ -153,7 +168,10 @@ public class AppTiendaGrafica extends Application {
         stockCol.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getStock()));
 
         table.getColumns().addAll(nombreCol, tipoCol, precioCol, stockCol);
-        ArrayList<Producto> listaProductos=inventario.getListaProductos();
+        ArrayList<Producto> listaProductos= null;
+
+            listaProductos = inventario.getListaProductos();
+
         for (Producto p:listaProductos){
             table.getItems().add(p);
         }
@@ -168,7 +186,12 @@ public class AppTiendaGrafica extends Application {
         box.setPadding(new Insets(10));
 
         ComboBox<Producto> combo = new ComboBox<>();
-        ArrayList<Producto> listaProductos=inventario.getListaProductos();
+        ArrayList<Producto> listaProductos= null;
+        try {
+            listaProductos = inventario.getListaProductos();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         for (Producto p:listaProductos){
             combo.getItems().add(p);
         }

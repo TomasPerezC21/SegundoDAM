@@ -14,9 +14,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class Inventario {
@@ -37,13 +35,52 @@ public class Inventario {
      * @return true si el inserta el producto en el invenario si el producto pasado cómo parametro el id no está en el inventario
      */
     public boolean insertarProducto(Producto producto){
-            return true;
+
+        if (producto instanceof Ropa){
+            Ropa ropa = (Ropa)producto;
+            String sql = "INSERT INTO productos\n" +
+                    " (id, nombre, precio, stock, talla, material)\n " +
+                    "VALUES (?,?,?,?,?,?)";
+
+
+        }
+        else{
+
+        }
+        return true;
     }
 
 
     //obtener arrayList de productos Electronicos y Ropa
-    public ArrayList<Producto> getListaProductos() {
+    public ArrayList<Producto> getListaProductos() throws SQLException {
         ArrayList<Producto> listaProductos=new ArrayList<>();
+
+        String sentenciaSQL = "select p.id, p.nombre, p.precio, p.stock, marca, garantia\n" +
+                "from productos p, electronicos e\n" +
+                "where p.id = e.id ;\n";
+
+        PreparedStatement pst = conexion.prepareStatement(sentenciaSQL);
+        ResultSet rs = pst.executeQuery();
+        while(rs.next()){
+
+            Electronico electronico = new Electronico(rs.getInt(1), rs.getString(2),
+                    rs.getDouble(3), rs.getInt(4), rs.getString(5), rs.getInt(6));
+            listaProductos.add(electronico);
+        }
+
+        String sentenciaSQL2 = "select p.id, p.nombre, p.precio, p.stock, talla, material\n" +
+                "from productos p , ropa r\n" +
+                "where p.id = r.id;\n";
+
+        pst = conexion.prepareStatement(sentenciaSQL2);
+        rs = pst.executeQuery();
+        while(rs.next()){
+            Ropa ropa = new Ropa(rs.getInt(1), rs.getString(2), rs.getDouble(3),
+                    rs.getInt(4), rs.getString(5), rs.getString(6));
+            listaProductos.add(ropa);
+        }
+
+
         return listaProductos;
 
     }
