@@ -1,5 +1,3 @@
-package Ejercicio1;
-
 /*
 L01	Clasificador de Colecciones	Crea un método que reciba tres parámetros:
         1. Una List<String> de palabras. 2. Un entero longitudMinima.
@@ -30,9 +28,11 @@ public class Ejercicio1 {
 
         int longMinima = 5;
 
-        boolean vocal = false;
+        boolean vocal = true;
 
-        ArrayList<String> resultado = clasificadorColecciones(listaPalabrasMinus, longMinima, vocal);
+        ArrayList<String> resultado;
+
+        resultado = clasificadorColecciones(listaPalabrasMinus, longMinima, vocal);
 
         for (String palabra : resultado) {
             System.out.println(palabra);
@@ -41,39 +41,26 @@ public class Ejercicio1 {
 
     public static ArrayList<String> clasificadorColecciones(ArrayList<String> palabras, int longitudMinima, boolean iniciarConVocal) {
 
-        String[]vocales = {"a","e","i","o","u"};
+        ArrayList<String> resultado = new ArrayList<>();
 
-        ArrayList<String> palabrasVocal = new ArrayList<>();
-        ArrayList<String> palabrasConsonante = new ArrayList<>();
-
+        String vocales = "aeiou";
 
         for (String palabra : palabras) {
 
-            if (iniciarConVocal) {
-                if (palabra.length() > longitudMinima) {
-                    for (String vocal : vocales) {
-                        if (palabra.startsWith(vocal)) {
-                            palabrasVocal.add(palabra);
-
-                        }
-                    }
-                }
+            //si el tamaño es menor pasamos a la siguiente palabra
+            if (palabra.length() < longitudMinima) {
+                continue;
             }
-            if (!iniciarConVocal) {
-                if (palabra.length() > longitudMinima) {
-                    palabrasConsonante.add(palabra);
-                }
+
+            char primeraLetra = palabra.charAt(0);
+            //devuelve -1 si la primera letra no se encuentra en la string vocales
+            boolean esVocal = (vocales.indexOf(primeraLetra) != -1);
+
+            if (iniciarConVocal == esVocal) {
+                resultado.add(palabra);
             }
         }
-
-        if (iniciarConVocal) {
-            return palabrasVocal;
-        }
-        else{
-            return palabrasConsonante;
-        }
-
+        return resultado;
     }
-
-
 }
+
