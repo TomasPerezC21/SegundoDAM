@@ -14,7 +14,6 @@ public class Concesionario {
     private ConcurrentLinkedDeque<Moto> motos;
 
     public Concesionario(){
-
         this.coches = new ConcurrentLinkedDeque<>();
         this.motos = new ConcurrentLinkedDeque<>();
     }
