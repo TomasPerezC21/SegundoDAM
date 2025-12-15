@@ -1,4 +1,6 @@
 package com.dam.vicentemedinaapp
 
-class ActividadesFragment {
+import androidx.fragment.app.Fragment
+
+class ActividadesFragment: Fragment() {
 }
