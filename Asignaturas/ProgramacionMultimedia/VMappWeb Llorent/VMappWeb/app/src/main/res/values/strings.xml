@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">VMappWeb</string>
+
+    <string name="lorem_ipsum">Este es un texto de ejemplo para rellenar espacio.</string>
+    <string name="next">Siguiente</string>
+    <string name="previous">Anterior</string>
+    <string name="first_fragment_label">Primer Fragmento</string>
+    <string name="second_fragment_label">Segundo Fragmento</string>
+
+</resources>

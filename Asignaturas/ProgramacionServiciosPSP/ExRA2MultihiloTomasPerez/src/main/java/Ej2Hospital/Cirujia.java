@@ -6,8 +6,8 @@ import java.util.Random;
 public class Cirujia implements Runnable {
     Random random = new Random();
 
-    private int idCirujia;
-    private String tipoCirujia;
+    private int idCirugia;
+    private String tipoCirugia;
     private int duracionQuirofano;
     private int duracionEquipoMedico;
     private Object quirofano;
@@ -16,15 +16,14 @@ public class Cirujia implements Runnable {
     private ArrayList<String> tiposCirujia;
 
     public Cirujia(int idCirujia, Object quirofano, Object equipoMedico) {
-        this.idCirujia = idCirujia;
+        this.idCirugia = idCirujia;
         this.tiposCirujia = obtenerTiposCirujia();
-        this.tipoCirujia = getTipoCirujia(random);
+        this.tipoCirugia = getTipoCirujia(random);
         this.duracionQuirofano = getDuracionQuirofano(random);
         this.duracionEquipoMedico = (duracionQuirofano/2500);
         this.quirofano = quirofano;
         this.equipoMedico = equipoMedico;
     }
-
 
     @Override
     public void run() {
@@ -32,15 +31,14 @@ public class Cirujia implements Runnable {
         try {
             while (true) {
 
-                System.out.println("Cirujia " + idCirujia + " se está preparando...");
+                System.out.println("Cirugia " + idCirugia + " se está preparando...");
                 Thread.sleep(duracionQuirofano);
-
 
                 Object primero;
                 Object segundo;
 
                 // para evitar el bloqueo se asignan los objetos en base al id (par, impar)
-                if (idCirujia % 2 == 0) {
+                if (idCirugia % 2 == 0) {
 
                     primero = quirofano;
                     segundo = equipoMedico;
@@ -52,10 +50,10 @@ public class Cirujia implements Runnable {
 
                 // Intentamos que la cirujia tenga ambos objetos (quiro y equipo medico)
                 synchronized (primero) {
-                    System.out.println("Cirujia " + idCirujia + " tiene quirofano asignado.");
+                    System.out.println("Cirugia " + idCirugia + " tiene quirofano asignado.");
 
                     synchronized (segundo) {
-                        System.out.println("Cirujia " + idCirujia + " tiene quirofano y equipo medico asignados. Empiza la cirujia.");
+                        System.out.println("Cirugia " + idCirugia + " tiene quirofano y equipo medico asignados. Empiza la cirujia.");
 
 
                         Thread.sleep(duracionEquipoMedico);
@@ -64,7 +62,7 @@ public class Cirujia implements Runnable {
                 }
 
 
-                System.out.println("Cirujia " + idCirujia + " ha terminado. El quirofano y el equipo médico están disponibles para otra cirujia.");
+                System.out.println("Cirujia " + idCirugia + " ha terminado. El quirofano y el equipo médico están disponibles para otra cirujia.");
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

@@ -24,7 +24,7 @@ public class Main {
 
         for (int i = 0; i < 10; i++) {
             Object quirofano = quirofanos[i];
-            Object equiMedico = equiposMedicos[(i+1)%equiposMedicos.length];
+            Object equiMedico = equiposMedicos[(i+1)%numEquiposMedicos];
 
             Cirujia c = new Cirujia(i, quirofano, equiMedico);
             new Thread(c).start();
