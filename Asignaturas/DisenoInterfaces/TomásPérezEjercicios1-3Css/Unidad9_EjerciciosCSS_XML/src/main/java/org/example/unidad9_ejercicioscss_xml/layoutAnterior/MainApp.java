@@ -1,0 +1,19 @@
+package org.example.unidad9_ejercicioscss_xml.layoutAnterior;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
+public class MainApp extends Application {
+    @Override
+    public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("layoutAnterior.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 900, 600);
+        stage.setTitle("Layout Anterior con CSS");
+        stage.setScene(scene);
+        stage.show();
+    }
+}
