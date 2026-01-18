@@ -11,43 +11,39 @@ import java.util.Scanner;
 public class Servidor {
 
     public static void main(String[] args) {
-
-        Scanner sc = new Scanner(System.in);
         Random rand = new Random();
-
         int puertoServidor = 1900;
+
 
         System.out.println("GENERANDO NÚMERO SECRETO EN SERVIDOR...");
         int secreto = generarNumeroSecreto(rand);
 
         ServerSocket socketServidor = null;
         Socket socketCliente = null;
-        DataInputStream entradaDatosDelCliente = null;
-        DataOutputStream salidaDatosAlCliente = null;
+        DataInputStream clienteEntrada = null;
+        DataOutputStream clienteSalida = null;
 
         try{
-
             socketServidor = new ServerSocket(puertoServidor);
             socketCliente = socketServidor.accept();
-            entradaDatosDelCliente = new DataInputStream(socketCliente.getInputStream());
-            salidaDatosAlCliente = new DataOutputStream(socketCliente.getOutputStream());
+            clienteEntrada = new DataInputStream(socketCliente.getInputStream());
+            clienteSalida = new DataOutputStream(socketCliente.getOutputStream());
 
-            salidaDatosAlCliente.writeInt(secreto);
+            int numeroCliente;
 
-            int numeroCliente = Integer.MAX_VALUE;
+            boolean acierto = false;
 
-
-
-            while(numeroCliente!=secreto){
-                numeroCliente = entradaDatosDelCliente.readInt();
+            while(!acierto){
+                numeroCliente = clienteEntrada.readInt();
                 if (numeroCliente > secreto){
-                    salidaDatosAlCliente.writeUTF("El número del cliente es mayor al número secreto.");
+                    clienteSalida.writeInt(1);
                 }
                else if(numeroCliente < secreto){
-                    salidaDatosAlCliente.writeUTF("El número del cliente es menor al número secreto.");
+                    clienteSalida.writeInt(2);
                 }
                 else {
-                    salidaDatosAlCliente.writeUTF("El cliente ha acertado el número secreto: " + secreto);
+                    clienteSalida.writeInt(3);
+                    acierto = true;
                 }
             }
 
@@ -55,6 +51,7 @@ public class Servidor {
             System.err.println("Error en servidor");
         }
 
+        System.out.println("Juego terminado. Número secreto: " + secreto);
     }
 
     private static int generarNumeroSecreto(Random rand) {

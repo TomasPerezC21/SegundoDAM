@@ -48,6 +48,7 @@ public class App1 {
         }
 
         pb.inheritIO();
+
 //        try {
 //            Process p2 = pb.start();
 //            BufferedReader br = new BufferedReader(new InputStreamReader(p2.getInputStream()));

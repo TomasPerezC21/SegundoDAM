@@ -1,9 +1,8 @@
-package socketTPCpalabrasMultihilo;
+package Ejercicio3;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Cliente {
@@ -11,7 +10,7 @@ public class Cliente {
     public static void main(String[] args) {
 
         String direccionServidor = "localhost";
-        int puertoServidor = 3000;
+        int puertoServidor = 2500;
 
         Socket socketCliente = null;
         DataInputStream entradaDelServidor = null;
@@ -43,5 +42,7 @@ public class Cliente {
             throw new RuntimeException(e);
         }
 
+
     }
+
 }
