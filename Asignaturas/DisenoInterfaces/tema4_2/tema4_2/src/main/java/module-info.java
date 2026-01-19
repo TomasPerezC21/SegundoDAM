@@ -2,7 +2,9 @@ module org.example.tema4_2 {
     requires javafx.controls;
     requires javafx.fxml;
 
+    opens eventosValidar to javafx.fxml;
+    exports eventosValidar;
 
-    opens org.example.tema4_2 to javafx.fxml;
-    exports org.example.tema4_2;
+    opens dragFiles to javafx.fxml;
+    exports dragFiles;
 }
