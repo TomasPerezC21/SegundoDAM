@@ -46,7 +46,6 @@ public class Servidor {
                             estadoServidor = 2; //Actualizamos el estado para avanzar a la contraseña
                             envioCliente.writeInt(estadoServidor); //Pasamos a solicitar contraseña
 
-
                         }else {
                             numIntentos--; //Si el usuario no es correcto se van restando intentos.
                             envioCliente.writeInt(estadoServidor); //Seguimos en estado1 pidiendo usuario hasta acabar intentos
@@ -112,6 +111,7 @@ public class Servidor {
                     break;
 
                     case 5:
+                        //Recibimos el nombre y pasamos al estado 6 para mostrar contenido
                         nombreArchivoSolicitado = reciboCliente.readUTF();
                         estadoServidor = 6;
 
@@ -128,13 +128,13 @@ public class Servidor {
                                 mensaje.append(linea).append("\n");
                             }
 
-                            envioCliente.writeUTF(mensaje.toString()); //Envio de contenido del archivo
+                            envioCliente.writeUTF(mensaje.toString()); //Envío de contenido del archivo al cliente
                             br.close();
                         }else{
                             envioCliente.writeUTF("Error. Archivo no encontrado.");
                         }
 
-                        estadoServidor = 3;//volvemos al 3
+                        estadoServidor = 3;//volvemos al 3 (principio de los comandos pero con sesión iniciada)
                         break;
                 }
 

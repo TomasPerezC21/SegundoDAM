@@ -22,8 +22,6 @@ public class ClienteCoches implements Runnable {
 
     @Override
     public void run() {
-
             concesionario.entregarCoches();
-
     }
 }

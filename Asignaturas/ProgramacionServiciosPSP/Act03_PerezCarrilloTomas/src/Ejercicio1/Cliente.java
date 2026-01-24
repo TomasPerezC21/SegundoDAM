@@ -19,10 +19,7 @@ public class Cliente {
         Scanner sc = new Scanner(System.in);
 
         try {
-            socketCliente = new Socket(direccionServidor,puertoServidor);
 
-            servidorEntrada = new DataInputStream(socketCliente.getInputStream());
-            servidorSalida = new DataOutputStream(socketCliente.getOutputStream());
 
             int numUsuario;
 
