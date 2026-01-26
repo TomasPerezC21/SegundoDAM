@@ -1,0 +1,30 @@
+.pagination {
+	-fx-border-insets: 10;
+    -fx-border-color:  #0E5D79;
+}
+ 
+.pagination .page {
+    -fx-background-color: #DDF1F8;
+}
+
+.pagination .page .label{
+	-fx-font-size:16;
+	-fx-background-color: lightblue;
+	-fx-pref-width:300px;
+}
+ 
+.pagination .pagination-control {
+    -fx-background-color: #C8C6C6;    
+}
+ 
+.pagination .pagination-control .number-button {
+    -fx-background-color: #DDF1F8;
+}
+ 
+.pagination .pagination-control .number-button:selected {   
+    -fx-background-color: #0E5D79;
+}
+ 
+.pagination .pagination-control .left-arrow, .right-arrow{
+    -fx-background-color: #0E5D79;
+}
