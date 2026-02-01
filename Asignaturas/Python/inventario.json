@@ -1,0 +1,14 @@
+[
+    {
+        "referencia": "REF001",
+        "nombre": "Monitor 24",
+        "precio": 150.0,
+        "stock": 6
+    },
+    {
+        "referencia": "REF002",
+        "nombre": "Teclado USB",
+        "precio": 20.0,
+        "stock": 50
+    }
+]

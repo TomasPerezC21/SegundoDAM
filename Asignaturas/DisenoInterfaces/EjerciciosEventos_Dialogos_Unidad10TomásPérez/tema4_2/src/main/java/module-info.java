@@ -11,4 +11,7 @@ module org.example.tema4_2 {
 
     opens choice to javafx.fxml;
     exports choice;
+
+    opens paginacion to javafx.fxml;
+    exports paginacion;
 }
