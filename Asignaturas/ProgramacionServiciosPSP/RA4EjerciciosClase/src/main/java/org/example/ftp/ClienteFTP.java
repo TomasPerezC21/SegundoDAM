@@ -80,11 +80,13 @@ public class ClienteFTP {
             }
 
             boolean login = ftp.login(username,password);
+            System.out.println("Login: " + login);
 
             if (!login) {
+                ftp.enterLocalPassiveMode();
+                ftp.disconnect();
                 return null;
             }
-
 
 
             return  ftp;
