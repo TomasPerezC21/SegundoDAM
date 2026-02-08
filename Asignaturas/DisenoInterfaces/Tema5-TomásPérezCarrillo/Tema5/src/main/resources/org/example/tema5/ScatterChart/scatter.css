@@ -1,0 +1,21 @@
+/* Estilos de la primera distribución de datos. Se cambia el color del borde y relleno */
+.default-color0.chart-symbol { 
+	-fx-background-color: #860061, yellow;
+	-fx-background-insets: 0, 2;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px;
+}
+
+/* Estilos de un valor concreto de la primera distribución */
+.default-color0.data5.chart-symbol { 
+	-fx-background-color: blue;
+}
+
+/*  Estilos de la segunda distribución de datos. Se cambia el icono a mostrar con SVG*/
+.default-color1.chart-symbol { 
+	-fx-stroke: #a9e200;
+    -fx-shape: "M0,4 L2,4 L4,8 L7,0 L9,0 L4,11 Z";
+}
+
+/* Tamaño de la leyenda para ajustarlo correctamente */
+.chart-legend-item  { -fx-pref-width: 130 }

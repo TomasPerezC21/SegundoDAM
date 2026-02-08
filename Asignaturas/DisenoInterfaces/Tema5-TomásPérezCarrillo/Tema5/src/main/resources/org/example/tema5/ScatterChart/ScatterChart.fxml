@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.ScatterChart?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tema5.ScatterChart.ScatterChartController">
+   <children>
+      <ScatterChart fx:id="scatterChart" stylesheets="@scatter.css" title="Inversiones">
+        <xAxis>
+          <CategoryAxis label="Años" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis label="Devolución a tiempo" side="LEFT" />
+        </yAxis>
+      </ScatterChart>
+   </children>
+</AnchorPane>

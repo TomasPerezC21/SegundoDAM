@@ -1,0 +1,101 @@
+/* Estilos generales del gráfico. Aparte de los estilos propios, hereda todos los de Region */
+.chart {
+    -fx-padding: 10px;
+    -fx-background-color: lightblue;
+    -fx-pref-width: 550px;
+    -fx-pref-height: 450px;
+    /*-fx-create-symbols: false; Este estilo sirve para no crear símbolos para marcar cada dato */
+}
+
+/* Estilos del contenido (se delimita por el borde para que veas donde se aplica) */
+.chart-content {
+    -fx-padding: 30px;
+    -fx-border-color: darkblue;
+}
+
+/* Estilos generales del área de la leyenda del gráfico */
+.chart-legend {
+   -fx-background-color: darkblue;
+   -fx-padding: 20px;
+}
+
+/* Estilos de los símbolos de la leyenda */
+.chart-legend-item-symbol{
+   -fx-opacity: 0.8;
+}
+ 
+/* Estilos generales de la etiqueta de la leyenda del gráfico */
+.chart-legend-item{
+    -fx-text-fill: white;
+}
+
+/* Estilos del título del gráfico */
+.chart-title {
+  -fx-text-fill: #4682b4;
+  -fx-font-size: 1.6em;
+}
+
+/* Estilos del fondo del área del gráfico */
+.chart-plot-background {
+    -fx-background-color: #e2ecfe;
+}
+
+/* Estilos de las líneas verticales */
+.chart-vertical-grid-lines {
+    -fx-stroke: #3278fa; /* Con stroke especificando solo el color se añade el color de líneas y se hacen discontinuas */
+}
+
+/* Estilos de las líneas horizontales */
+.chart-horizontal-grid-lines {
+    -fx-stroke: brown;
+}
+
+/* Estilos para alternar la apariencia de las filas pares e impares 
+ * Existe el estilo equivalente para column fill. Se pueden desactivar estos estilos con las propiedades 
+ * alternativeRowFillVisible o alternativeColumnFillVisible*/
+.chart-alternative-row-fill {
+    -fx-fill: #99bcfd;
+    -fx-stroke: transparent;
+    -fx-stroke-width: 0;
+}
+
+/* Estilos generales de los ejes */
+.axis {
+    -fx-tick-label-fill: #914800;
+    -fx-tick-length: 20;
+    -fx-minor-tick-length: 10;
+}
+
+/* Estilos de las etiquetas de los ejes */ 
+.axis-label {
+   -fx-text-fill: #462300;
+   -fx-font-weight: bold; 
+}
+
+/* Estilos de las marcas de los ejes */
+.axis-tick-mark {
+    -fx-stroke: #637040;
+    -fx-stroke-width: 3; 
+}
+
+/* Estilos de las "submarcas" de los ejes */
+.axis-minor-tick-mark {
+    -fx-stroke: #859656;
+}
+
+/* Estilos generales de la línea de cada serie del gráfico */
+.chart-series-line {    
+    -fx-stroke-width: 5px;
+    -fx-effect: null;
+}
+
+/* Estilos concretos por cada serie (se indica con el prefijo .default-colori siendo i el orden de cada serie */
+.default-color0.chart-series-line { -fx-stroke: #e9967a; }
+.default-color1.chart-series-line { -fx-stroke: #f0e68c; }
+ 
+ /* El estilo chart-line-symbol hace referencia al símbolo circular que marca cada dato concreto */
+.default-color0.chart-line-symbol { -fx-background-color: red, grey; }
+.default-color1.chart-line-symbol { -fx-background-color: orange, grey; }
+
+/* Si se añade datai (siendo i el número de símbolo) se puede cambiar un símbolo circular concreto */
+.default-color0.data5.chart-line-symbol { -fx-background-color: blue; }

@@ -40,7 +40,6 @@ public class EnvioMail {
             }
 
 
-
         } catch (NoSuchProviderException e) {
             throw new RuntimeException(e);
         } catch (MessagingException e) {

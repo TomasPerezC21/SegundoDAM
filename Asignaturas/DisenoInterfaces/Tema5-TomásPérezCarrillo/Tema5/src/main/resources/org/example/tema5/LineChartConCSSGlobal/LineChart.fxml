@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tema5.LineChartConCSSGlobal.LineChartController">
+   <children>
+      <LineChart fx:id="lineChart" alternativeColumnFillVisible="true" stylesheets="@line.css" title="Ganancias anuales">
+        <xAxis>
+          <CategoryAxis autoRanging="false" endMargin="0.0" gapStartAndEnd="false" label="Mes" side="BOTTOM" startMargin="20.0" tickLabelGap="10.0" tickLabelRotation="45.0" tickLength="15.0" fx:id="xAxis" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis label="Visitas" lowerBound="-50.0" tickUnit="20.0" upperBound="50.0" />
+        </yAxis>
+      </LineChart>
+   </children>
+</AnchorPane>

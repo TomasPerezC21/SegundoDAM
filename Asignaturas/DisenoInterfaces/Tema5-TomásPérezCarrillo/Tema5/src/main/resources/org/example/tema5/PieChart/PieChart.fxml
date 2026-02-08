@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tema5.PieChart.PieChartController">
+   <children>
+      <PieChart fx:id="pieChart" labelLineLength="50.0" legendSide="LEFT" stylesheets="@pie.css" title="Imported Fruits" />
+   </children>
+</AnchorPane>
