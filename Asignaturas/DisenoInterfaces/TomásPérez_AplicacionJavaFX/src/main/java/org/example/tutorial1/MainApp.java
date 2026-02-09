@@ -1,6 +1,7 @@
 package org.example.tutorial1;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -19,23 +20,53 @@ public class MainApp extends Application {
     private BorderPane rootLayout;
 
     /**
-     * The data as an observable list of Persons.
+     * Datos como una lista observable de Personas.
      */
     private ObservableList<Person> personData = FXCollections.observableArrayList();
 
     public MainApp() {
-        // Add some sample data
-        personData.add(new Person("Hans", "Muster"));
-        personData.add(new Person("Ruth", "Mueller"));
-        personData.add(new Person("Heinz", "Kurz"));
-        personData.add(new Person("Cornelia", "Meier"));
-        personData.add(new Person("Werner", "Meyer"));
-        personData.add(new Person("Lydia", "Kunz"));
-        personData.add(new Person("Anna", "Best"));
-        personData.add(new Person("Stefan", "Meier"));
-        personData.add(new Person("Martin", "Mueller"));
-    }
+        // Añadimos datos con meses variados para que el gráfico tenga barras
+        Person p1 = new Person("Hans", "Muster");
+        p1.setBirthday(LocalDate.of(1990, 1, 15)); // Enero
+        personData.add(p1);
 
+        Person p2 = new Person("Ruth", "Mueller");
+        p2.setBirthday(LocalDate.of(1995, 3, 20)); // Marzo
+        personData.add(p2);
+
+        Person p3 = new Person("Heinz", "Kurz");
+        p3.setBirthday(LocalDate.of(2000, 5, 5)); // Mayo
+        personData.add(p3);
+
+        Person p4 = new Person("Álvaro", "Guy");
+        p4.setBirthday(LocalDate.of(1990, 2, 15)); // Febrero
+        personData.add(p4);
+
+        Person p5 = new Person("Tomás", "Pérez");
+        p5.setBirthday(LocalDate.of(1995, 4, 20)); // abril
+        personData.add(p5);
+
+        Person p6 = new Person("Alejandro", "Sandoval");
+        p6.setBirthday(LocalDate.of(2000, 7, 5)); // julio
+        personData.add(p6);
+
+        Person p7 = new Person("Jose", "Paco");
+        p7.setBirthday(LocalDate.of(1990, 8, 15)); // agosto
+        personData.add(p7);
+
+        Person p8 = new Person("Borja", "Pérez");
+        p8.setBirthday(LocalDate.of(1995, 12, 20)); // diciembre
+        personData.add(p8);
+
+        Person p9 = new Person("Alejandro", "Fernandez");
+        p9.setBirthday(LocalDate.of(2000, 3, 5)); // Marzo
+        personData.add(p9);
+
+        Person p10 = new Person("Paco", "Fernandez");
+        p10.setBirthday(LocalDate.of(2000, 11, 5)); // noviembre
+        personData.add(p10);
+
+    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -46,25 +77,26 @@ public class MainApp extends Application {
                 new Image(getClass().getResourceAsStream("/images/location_2149438.png"))
         );
 
-
         initRootLayout();
-
         showPersonOverview();
     }
 
     /**
-     * Initializes the root layout.
+     * Inicializa el root layout.
      */
     public void initRootLayout() {
         try {
-            // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("rootLayout.fxml"));
             rootLayout = (BorderPane) loader.load();
 
-            // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
+
+            // Esto conecta el menú con la lógica
+            RootLayoutController controller = loader.getController();
+            controller.setMainApp(this);
+
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -72,21 +104,43 @@ public class MainApp extends Application {
     }
 
     /**
-     * Opens a dialog to edit details for the specified person. If the user
-     * clicks OK, the changes are saved into the provided person object and true
-     * is returned.
-     *
-     * @param person the person object to be edited
-     * @return true if the user clicked OK, false otherwise.
+     * Muestra la vista de estadísticas de cumpleaños.
+     * Este es el método nuevo requerido por el ejercicio.
+     */
+    public void showBirthdayStatistics() {
+        try {
+            // Cargar el archivo fxml y crear un nuevo stage para el diálogo.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("BirthdayStatistics.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Birthday Statistics");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Pasar los datos de las personas al controlador.
+            BirthdayStatisticsController controller = loader.getController();
+            controller.setPersonData(personData);
+
+            dialogStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Abre un diálogo para editar los detalles de la persona especificada.
      */
     public boolean showPersonEditDialog(Person person) {
         try {
-            // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("PersonEditDialog.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
-            // Create the dialog Stage.
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Edit Person");
             dialogStage.initModality(Modality.WINDOW_MODAL);
@@ -94,12 +148,10 @@ public class MainApp extends Application {
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
-            // Set the person into the controller.
             PersonEditDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setPerson(person);
 
-            // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
 
             return controller.isOkClicked();
@@ -110,20 +162,16 @@ public class MainApp extends Application {
     }
 
     /**
-     * Shows the person overview inside the root layout.
+     * Muestra la vista general de personas dentro del root layout.
      */
     public void showPersonOverview() {
         try {
-            // Load person overview.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("PersonOverview.fxml"));
             AnchorPane personOverview = (AnchorPane) loader.load();
 
-            // Set person overview into the center of root layout.
             rootLayout.setCenter(personOverview);
 
-
-            // Give the controller access to the main app.
             PersonOverviewController controller = loader.getController();
             controller.setMainApp(this);
 
@@ -132,13 +180,6 @@ public class MainApp extends Application {
         }
     }
 
-
-
-
-    /**
-     * Returns the main stage.
-     * @return
-     */
     public Stage getPrimaryStage() {
         return primaryStage;
     }
@@ -147,13 +188,7 @@ public class MainApp extends Application {
         launch(args);
     }
 
-    /**
-     * Returns the data as an observable list of Persons.
-     * @return
-     */
     public ObservableList<Person> getPersonData() {
         return personData;
     }
-
-
 }
