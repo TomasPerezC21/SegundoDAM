@@ -1,0 +1,16 @@
+Rick Sanchez .Especie: Human
+
+Morty Smith .Especie: Human
+
+Summer Smith .Especie: Human
+
+Beth Smith .Especie: Human
+
+Jerry Smith .Especie: Human
+
+Abadango Cluster Princess .Especie: Alien
+
+Annie .Especie: Human
+
+Antenna Morty .Especie: Human
+

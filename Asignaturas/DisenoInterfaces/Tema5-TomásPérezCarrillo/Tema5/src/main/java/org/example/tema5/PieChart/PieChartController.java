@@ -12,7 +12,7 @@ public class PieChartController {
 
     @FXML
     private void initialize(){
-        // Rellenamos los datos del gráfico
+
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
                 new PieChart.Data("Grapefruit", 13),
                 new PieChart.Data("Oranges", 25),

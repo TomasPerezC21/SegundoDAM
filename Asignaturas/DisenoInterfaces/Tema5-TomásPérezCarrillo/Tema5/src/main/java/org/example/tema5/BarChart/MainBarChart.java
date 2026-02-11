@@ -16,12 +16,10 @@ public class MainBarChart extends Application {
 
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
-        stage.setTitle("Paginación Personas");
+        stage.setTitle("Paginación de Personas");
         stage.setScene(scene);
         stage.show();
     }
-
-
 
     public static void main(String[] args) {
         launch(args);

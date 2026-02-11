@@ -1,0 +1,313 @@
+
+
+COGER UNA LINEA E IR PARTIENDO EN ARRAYS PARA QUEDARSE CON LAS COSAS
+
+
+
+static ArrayList<String> obtenerUsuarios(String nombreFichero) {
+
+    ArrayList<String> usuarios = new ArrayList<>();
+
+    try (BufferedReader br = new BufferedReader(new FileReader(nombreFichero))) {
+        String linea;
+        while ((linea = br.readLine()) != null) {
+            String[] partes = linea.trim().split(" ");
+            usuarios.add(partes[0]);
+        }
+    } catch (IOException e) {
+        throw new RuntimeException(e);
+    }
+
+    return usuarios;
+}
+
+------------------------------------------------------------------------------------------------------
+Método	Qué es realmente
+getInputStream()	👉 Lo que el hijo ESCRIBE por System.out
+getErrorStream()	👉 Lo que el hijo ESCRIBE por System.err
+getOutputStream()	👉 Lo que el padre LE MANDA al hijo (stdin)
+
+EL PADRE LEE LA CONSOLA
+ BufferedReader out =new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+  String linea;
+  System.out.println("=== STDOUT ===");
+ while (true) {
+            try {
+                if (((linea = br.readLine()) != null)) continue;
+                System.out.println(linea);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println(linea);
+        }
+
+
+EL PADRE MANDA POR TECLADO
+
+----HIJO
+  BufferedReader br =
+            new BufferedReader(new InputStreamReader(System.in));
+
+        String linea;
+
+        // Lee hasta que el padre deje de escribir (EOF)
+        while ((linea = br.readLine()) != null) {
+            System.out.println("HIJO recibe: " + linea);
+        }
+
+        System.out.println("HIJO: fin de entrada");
+
+  --------PADRE
+   BufferedWriter bw =new BufferedWriter( new OutputStreamWriter(process.getOutputStream()));
+
+          // Escribimos varias líneas
+          bw.write("hola");
+          bw.newLine();
+
+          bw.write("que tal");
+          bw.newLine();
+
+          bw.write("adios");
+          bw.newLine();
+
+          // 🔥 IMPRESCINDIBLE 🔥
+          bw.flush(); // asegura que se envía todo
+          bw.close(); // manda EOF al hijo
+
+          // Leer la salida del hijo
+          BufferedReader br =
+              new BufferedReader(
+                  new InputStreamReader(process.getInputStream())
+              );
+
+          String linea;
+          while ((linea = br.readLine()) != null) {
+              System.out.println("PADRE lee: " + linea);
+          }
+
+          -----------------------------VALIDACIONES---------------------------------------------------
+
+Validar DNI español
+public static boolean validarDNI(String dni) {
+    if (!dni.matches("\\d{8}[A-Z]")) return false;
+    String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+    int num = Integer.parseInt(dni.substring(0, 8));
+    return dni.charAt(8) == letras.charAt(num % 23);
+}
+
+
+    public static boolean validarFecha(String fecha) {
+        if (fecha == null) return false;
+
+        fecha = fecha.trim();
+
+        String[] partes = fecha.split("/");
+
+        if (partes.length != 3) return false;
+
+        try {
+            int dia = Integer.parseInt(partes[0]);
+            int mes = Integer.parseInt(partes[1]);
+            int anio = Integer.parseInt(partes[2]);
+
+            if (anio < 1900 || anio > 2100) return false;
+            if (mes < 1 || mes > 12) return false;
+            if (dia < 1 || dia > 31) return false;
+
+            // meses con 30 días
+            if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30)
+                return false;
+
+            // febrero
+            if (mes == 2) {
+                boolean bisiesto = (anio % 4 == 0 && anio % 100 != 0) || (anio % 400 == 0);
+                if (bisiesto && dia > 29) return false;
+                if (!bisiesto && dia > 28) return false;
+            }
+
+            return true;
+
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+🔐 Validar contraseña
+
+>8 caracteres, letras y números
+
+public static boolean validarContrasena(String pass) {
+    if (pass.length() <= 8) return false;
+    boolean letra = false, numero = false;
+    for (char c : pass.toCharArray()) {
+        if (Character.isLetter(c)) letra = true;
+        if (Character.isDigit(c)) numero = true;
+    }
+    return letra && numero;
+}
+
+📧 Validar email (simple)
+public static boolean validarEmail(String email) {
+    return email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$");
+}
+
+📞 Validar teléfono español (9 dígitos)
+public static boolean validarTelefono(String tlf) {
+    return tlf.matches("\\d{9}");
+}
+
+🔢 Validar número entero positivo
+public static boolean validarEnteroPositivo(String n) {
+    try {
+        return Integer.parseInt(n) > 0;
+    } catch (NumberFormatException e) {
+        return false;
+    }
+}
+
+🔠 Validar solo letras
+public static boolean soloLetras(String s) {
+    return s.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+");
+}
+
+🔡 Validar solo números
+public static boolean soloNumeros(String s) {
+    return s.matches("\\d+");
+}
+
+🆔 Validar nick (letras y números, sin espacios)
+public static boolean validarNick(String nick) {
+    return nick.matches("[a-zA-Z0-9]{3,}");
+}
+
+⏰ Validar hora HH:mm:ss
+public static boolean validarHora(String hora) {
+    try {
+        LocalTime.parse(hora, DateTimeFormatter.ofPattern("HH:mm:ss"));
+        return true;
+    } catch (Exception e) {
+        return false;
+    }
+}
+
+📦 Validar String no vacío
+public static boolean noVacio(String s) {
+    return s != null && !s.trim().isEmpty();
+}
+
+🎯 Validar rango numérico
+public static boolean validarRango(int n, int min, int max) {
+    return n >= min && n <= max;
+}
+
+PADRE LEYENDO LA “CONSOLA” DEL HIJO (STDOUT)
+BufferedReader out =
+    new BufferedReader(
+        new InputStreamReader(process.getInputStream())
+    );
+
+String linea;
+while ((linea = out.readLine()) != null) {
+    System.out.println("PADRE recibe: " + linea);
+}
+
+
+📌 Lee TODO lo que el hijo haga con System.out.println().
+
+⌨️ PADRE ENVIANDO DATOS AL HIJO (stdin del hijo)
+BufferedWriter bw =
+    new BufferedWriter(
+        new OutputStreamWriter(process.getOutputStream())
+    );
+
+bw.write("hola");
+bw.newLine();
+
+bw.write("que tal");
+bw.newLine();
+
+bw.write("adios");
+bw.newLine();
+
+bw.flush();   // envía datos
+bw.close();   // 🔥 MUY IMPORTANTE → EOF
+
+
+📌 close() indica fin de datos al hijo.
+
+👶 HIJO LEYENDO LO QUE MANDA EL PADRE
+BufferedReader br =
+    new BufferedReader(
+        new InputStreamReader(System.in)
+    );
+
+String linea;
+while ((linea = br.readLine()) != null) {
+    System.out.println("HIJO recibe: " + linea);
+}
+
+System.out.println("HIJO: fin de entrada");
+
+
+📌 readLine() devuelve null cuando el padre hace close().
+
+🔁 PROTOCOLO “UNA COSA POR LÍNEA” (MUY USADO)
+PADRE ENVÍA
+bw.write(nick);
+bw.newLine();
+bw.write(fecha);
+bw.newLine();
+bw.write(contrasena);
+bw.newLine();
+
+HIJO RECIBE (3 líneas = 1 usuario)
+while ((nick = br.readLine()) != null) {
+    fecha = br.readLine();
+    contrasena = br.readLine();
+    if (fecha == null || contrasena == null) break;
+}
+
+📥 PADRE LEYENDO CON SCANNER (TECLADO REAL)
+Scanner sc = new Scanner(System.in);
+String linea = sc.nextLine();
+
+
+👉 El Scanner solo es del padre
+👉 El hijo NO lee el Scanner del padre
+
+❓ Scanner.hasNextLine() (IMPORTANTE)
+Scanner sc = new Scanner(System.in);
+
+while (sc.hasNextLine()) {
+    String linea = sc.nextLine();
+}
+
+
+hasNextLine() → true si hay datos
+
+false cuando llega EOF
+
+En procesos, EOF llega cuando el padre cierra el stream
+
+⚠️ Scanner vs BufferedReader (EXAMEN)
+✅ BufferedReader (RECOMENDADO)
+BufferedReader br =
+    new BufferedReader(new InputStreamReader(System.in));
+
+
+System.out.println("usuarios distintos que han accedido");
+        int usuariosDistintos = 0;
+        for (int i = 0; i < usuarios.size(); i++) {
+            int j;
+            for (j = 0; j < i; j++) {
+                if (usuarios.get(i).equals(usuarios.get(j))) {
+                    break;
+                }
+            }
+            if (j == i) {
+                usuariosDistintos++;
+                System.out.println(usuarios.get(i));
+            }
+        }
+        System.out.println(usuariosDistintos);

@@ -1,0 +1,135 @@
+🔥 1️⃣ SOLO ELEMENTOS NO REPETIDOS
+Set<String> unicos = new HashSet<>();
+
+for (String palabra : lista) {
+    if (unicos.add(palabra)) {
+        System.out.println(palabra);
+    }
+}
+SI QUIERO LOS QUE SE REPITEN, CREO UN ARRAY NUEVA Y
+ LOS QUE NO AÑADO EN EL HASHSET LOS AÑADO A ESA ARRAY
+
+🔥 2️⃣ DETECTAR REPETIDOS
+Set<String> vistos = new HashSet<>();
+
+for (String palabra : lista) {
+    if (!vistos.add(palabra)) {
+        System.out.println("Repetido: " + palabra);
+    }
+}
+
+🔥 3️⃣ SOLO PALABRAS QUE EMPIEZAN POR UNA LETRA
+if (palabra.toLowerCase().startsWith("a")) {
+    System.out.println(palabra);
+}
+
+🔥 4️⃣ SOLO PALABRAS QUE TERMINAN EN...
+if (palabra.toLowerCase().endsWith("ion")) {
+    System.out.println(palabra);
+}
+
+🔥 5️⃣ SOLO PALABRAS QUE CONTIENEN UNA SUBCADENA
+if (palabra.toLowerCase().contains("star")) {
+    System.out.println(palabra);
+}
+
+🔥 6️⃣ SOLO PALABRAS DE LONGITUD MAYOR A X
+if (palabra.length() > 5) {
+    System.out.println(palabra);
+}
+
+🔥 7️⃣ SOLO PALABRAS DE LONGITUD EXACTA
+if (palabra.length() == 4) {
+    System.out.println(palabra);
+}
+
+🔥 8️⃣ SOLO PALABRAS QUE NO CONTENGAN NÚMEROS
+if (!palabra.matches(".*\\d.*")) {
+    System.out.println(palabra);
+}
+
+🔥 9️⃣ SOLO PALABRAS QUE CONTENGAN VOCALES
+if (palabra.matches(".*[aeiouAEIOU].*")) {
+    System.out.println(palabra);
+}
+
+🔥 🔟 ORDENAR ALFABÉTICAMENTE
+Collections.sort(lista);
+
+🔥 1️⃣1️⃣ ORDENAR ALFABÉTICAMENTE IGNORANDO MAYÚSCULAS
+lista.sort(String.CASE_INSENSITIVE_ORDER);
+
+🔥 1️⃣2️⃣ ORDENAR POR LONGITUD
+lista.sort((a, b) -> a.length() - b.length());
+
+🔥 1️⃣3️⃣ MEZCLAR ORDEN
+Collections.shuffle(lista);
+
+🔥 1️⃣4️⃣ CONTAR CUÁNTAS VECES SE REPITE CADA PALABRA
+Map<String, Integer> contador = new HashMap<>();
+
+for (String palabra : lista) {
+    contador.put(palabra, contador.getOrDefault(palabra, 0) + 1);
+}
+
+🔥 1️⃣5️⃣ SOLO PALABRAS QUE SE REPITEN MÁS DE UNA VEZ
+for (String palabra : contador.keySet()) {
+    if (contador.get(palabra) > 1) {
+        System.out.println(palabra);
+    }
+}
+
+🔥 1️⃣6️⃣ COMPROBAR SI RESPUESTA ESTÁ ENTRE VARIAS OPCIONES
+List<String> validas = Arrays.asList("bye", "goodbye");
+
+if (validas.contains(respuesta.toLowerCase())) {
+    System.out.println("Correcto");
+}
+
+🔥 1️⃣7️⃣ SOLO NÚMEROS MAYORES A X
+if (numero > 50) {
+    System.out.println(numero);
+}
+
+🔥 1️⃣8️⃣ SOLO NÚMEROS PARES
+if (numero % 2 == 0) {
+    System.out.println(numero);
+}
+
+🔥 1️⃣9️⃣ SOLO NÚMEROS PRIMOS
+boolean primo = true;
+
+for (int i = 2; i <= Math.sqrt(numero); i++) {
+    if (numero % i == 0) {
+        primo = false;
+        break;
+    }
+}
+
+if (primo && numero > 1) {
+    System.out.println(numero);
+}
+
+🔥 2️⃣0️⃣ FILTRAR VARIAS CONDICIONES A LA VEZ
+if (palabra.length() > 5 &&
+    palabra.toLowerCase().startsWith("a") &&
+    !palabra.matches(".*\\d.*")) {
+
+    System.out.println(palabra);
+}
+
+🧠 BONUS — PLANTILLA EXAMEN SERVIDOR
+for (String palabra : lista) {
+
+    salida.writeUTF(palabra);
+
+    String respuesta = entrada.readUTF();
+
+    if (condicion) {
+        aciertos++;
+        salida.writeUTF("CORRECTO");
+    } else {
+        fallos++;
+        salida.writeUTF("INCORRECTO");
+    }
+}

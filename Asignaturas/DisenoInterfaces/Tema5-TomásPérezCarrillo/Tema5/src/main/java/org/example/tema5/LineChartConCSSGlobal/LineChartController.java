@@ -33,7 +33,7 @@ public class LineChartController {
         xAxis.setCategories(monthNames);
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
-        series.setName("Ganancias 2018");
+        series.setName("Ganancias de 2018");
 
         series.getData().add(new XYChart.Data<>("Jan", 23));
         series.getData().add(new XYChart.Data<>("Feb", 14));

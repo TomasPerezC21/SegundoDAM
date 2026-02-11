@@ -14,7 +14,7 @@ public class ScatterChartController {
     @FXML
     private void initialize() {
         XYChart.Series<String, Double> series1 = new XYChart.Series<>();
-        series1.setName("Renta variable");
+        series1.setName("Renta");
         series1.getData().add(new XYChart.Data<String, Double>("1", 193.2));
         series1.getData().add(new XYChart.Data<String, Double>("2", 29.6));
         series1.getData().add(new XYChart.Data<String, Double>("3", 42.3));
