@@ -23,11 +23,11 @@ public class FTP {
             //DESCOMENTA ESTOOO
 
 
-            //ejercicio1(ftp, usuario);
+            ejercicio1(ftp, usuario);
 
             //ejercicio2(ftp,usuario);
 
-            ejercicio3(ftp,usuario);
+            //ejercicio3(ftp,usuario);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
