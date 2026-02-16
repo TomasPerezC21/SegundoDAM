@@ -139,7 +139,6 @@ public class Cliente {
             socketCliente.close();
 
 
-
         }catch (IOException e) {
             throw new RuntimeException(e);
         }
