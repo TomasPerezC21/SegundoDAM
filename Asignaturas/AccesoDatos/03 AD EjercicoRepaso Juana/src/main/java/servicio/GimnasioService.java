@@ -14,8 +14,7 @@ import java.util.List;
 public class GimnasioService {
     private EntityManagerFactory emf;
 
-    public GimnasioService() {
-        emf = Persistence.createEntityManagerFactory("repasoJPA");
+    public GimnasioService() {emf = Persistence.createEntityManagerFactory("repasoJPA");
     }
 
     public boolean insertarReserva(Integer idCliente, Integer idActividad) {
