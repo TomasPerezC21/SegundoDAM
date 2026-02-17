@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "859058844005",
+    "project_id": "fir-tpc",
+    "storage_bucket": "fir-tpc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:859058844005:android:e28cd859290ec7da61f18c",
+        "android_client_info": {
+          "package_name": "com.example.firebasetpc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtu9lI714p-3Fv2lt16nl3ptFd--l5Ys4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
